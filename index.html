@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-title" content="SITC JIAXIANG 订舱" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="format-detection" content="telephone=no" />
-  <meta name="sitc-build" content="V15" />
+  <meta name="sitc-build" content="V16" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png" />
@@ -293,10 +293,17 @@
 
     .query-options{
       display:grid;
-      grid-template-columns:minmax(126px,.72fr) minmax(0,1.42fr);
-      gap:10px;margin-top:12px;align-items:end
+      grid-template-columns:minmax(126px,.78fr) minmax(0,1.22fr);
+      gap:12px;
+      margin-top:12px;
+      padding:12px;
+      align-items:start;
+      border:1px solid color-mix(in srgb,var(--blue) 14%,var(--line));
+      border-radius:18px;
+      background:linear-gradient(145deg,color-mix(in srgb,var(--blue) 4%,var(--surface)),color-mix(in srgb,var(--surface) 96%,var(--bg)));
+      overflow:hidden
     }
-    .compact-field{margin:0}
+    .compact-field{min-width:0;margin:0}
     .compact-field label{
       display:flex;align-items:center;gap:6px;margin:0 0 7px 3px;color:var(--muted);font-size:10px;font-weight:850
     }
@@ -321,6 +328,13 @@
       stroke-linecap:round;stroke-linejoin:round
     }
     .agreement-entry-row{display:block}
+    .query-options .compact-shell{width:100%}
+    .query-options .agreement-input-help{
+      margin-top:8px;
+      padding:10px 11px;
+      line-height:1.55;
+      overflow-wrap:anywhere
+    }
     .export-tools{
       margin-top:12px;padding:11px;border:1px solid color-mix(in srgb,var(--blue) 15%,var(--line));
       border-radius:18px;background:color-mix(in srgb,var(--blue) 4%,var(--surface))
@@ -1445,7 +1459,7 @@
 }
 
   </style>
-  <link rel="stylesheet" href="./assets/mobile-v2.css?v=15" />
+  <link rel="stylesheet" href="./assets/mobile-v2.css?v=16" />
   <style id="mobileEmergencyLayout">
     /* Built-in mobile fallback: prevents the desktop map layout appearing when an old CSS/JS file is cached. */
     @media (max-width:900px), (pointer:coarse) and (hover:none) and (max-width:1180px){
@@ -2102,7 +2116,7 @@
         customer:"客户",route:"航线",addAgreement:"新增协议",resetDefault:"恢复默认",exportConfig:"导出配置",save:"保存",
         copied:"报价已复制",notFound:"未找到该提单号",saved:"协议配置已保存在本浏览器",resetDone:"已恢复默认协议价",exported:"配置文件已导出",
         invalidAgreement:"协议号无效或与航线不匹配，当前显示公开表价",agreementLocked:"协议价已锁定",baseRate:"公开表价",includes:"含 LSS / EBS",options:"个方案",
-        noScheduleData:"上传的古晋船期表暂未提供该目的港船期",priceOnlyReady:"已显示表价或协议价，船期待更新",rateFormatHint:"每格格式：20GP/40HC",portSelected:"已选择目的港",portUnavailable:"该港口暂未配置目的港船期",originPortOnly:"该港口目前仅作为起运港",
+        noScheduleData:"上传的古晋船期表暂未提供该目的港船期",noScheduleAfterDate:"所选日期后暂无可用船期",noScheduleAfterDateHint:"请选择更早的起始日期，或联系 SITC 嘉祥确认后续船期。",priceOnlyReady:"已显示表价或协议价，船期待更新",rateFormatHint:"每格格式：20GP/40HC",portSelected:"已选择目的港",portUnavailable:"该港口暂未配置目的港船期",originPortOnly:"该港口目前仅作为起运港",
         cloudOnline:"云端数据已同步",cloudFallback:"云端未配置，显示本地公开数据",cloudError:"云端连接失败，显示本地公开数据",agreementPending:"点击查询以验证协议号",agreementChecking:"正在验证协议号…",adminPortal:"管理员后台",direct:"直达",transit:"次中转",sample:"截图演示数据"
       },
       en:{
@@ -2124,7 +2138,7 @@
         customer:"Customer",route:"Route",addAgreement:"Add agreement",resetDefault:"Reset defaults",exportConfig:"Export config",save:"Save",
         copied:"Quote copied",notFound:"B/L number not found",saved:"Agreement settings saved in this browser",resetDone:"Default agreements restored",exported:"Configuration exported",
         invalidAgreement:"Agreement is invalid or does not match this route; public tariff is shown",agreementLocked:"Agreement rate locked",baseRate:"Public tariff",includes:"LSS / EBS included",options:"options",
-        noScheduleData:"The uploaded Kuching schedule does not contain sailings for this destination",priceOnlyReady:"Public or agreement rates shown; schedule pending",rateFormatHint:"Cell format: 20GP/40HC",portSelected:"Destination selected",portUnavailable:"No destination schedule is configured for this port yet",originPortOnly:"This port is currently available as an origin only",
+        noScheduleData:"The uploaded Kuching schedule does not contain sailings for this destination",noScheduleAfterDate:"No available sailings after the selected date",noScheduleAfterDateHint:"Choose an earlier start date or contact SITC JIAXIANG for upcoming sailings.",priceOnlyReady:"Public or agreement rates shown; schedule pending",rateFormatHint:"Cell format: 20GP/40HC",portSelected:"Destination selected",portUnavailable:"No destination schedule is configured for this port yet",originPortOnly:"This port is currently available as an origin only",
         cloudOnline:"Cloud data synced",cloudFallback:"Cloud is not configured; local public data is shown",cloudError:"Cloud connection failed; local public data is shown",agreementPending:"Search to validate the agreement number",agreementChecking:"Checking agreement number…",adminPortal:"Admin portal",direct:"Direct",transit:"transshipment",sample:"Screenshot-based demonstration data"
       }
     };
@@ -2950,12 +2964,17 @@
     }
     function renderSchedules(){
       const destination=$("destinationSelect").value||"Shanghai";
-      const list=SCHEDULES[destination]||[];
+      const allSchedules=SCHEDULES[destination]||[];
+      const departureDate=$("departureDate").value;
+      const list=departureDate?allSchedules.filter(schedule=>schedule.etd.slice(0,10)>=departureDate):allSchedules;
       const rate=selectedRate(destination);
       $("scheduleCount").textContent=`${list.length} ${t("options")}`;
       updateAgreementState(rate);
       if(!list.length){
-        $("scheduleList").innerHTML=`<div class="empty-schedule-card"><strong>${escapeHtml(portName(destination))} · ${t("noScheduleData")}</strong><p>${state.lang==="zh"?"运价和条款请查看右侧结果区。":"Please view rates and terms in the result panel on the right."}</p></div>`;
+        const filteredOut=allSchedules.length>0&&departureDate;
+        const title=filteredOut?t("noScheduleAfterDate"):t("noScheduleData");
+        const hint=filteredOut?t("noScheduleAfterDateHint"):(state.lang==="zh"?"运价和条款请查看右侧结果区。":"Please view rates and terms in the result panel on the right.");
+        $("scheduleList").innerHTML=`<div class="empty-schedule-card"><strong>${escapeHtml(portName(destination))} · ${escapeHtml(title)}</strong><p>${escapeHtml(hint)}</p></div>`;
         return;
       }
       $("scheduleList").innerHTML=list.map(s=>{
@@ -3062,7 +3081,17 @@
 
       state.selectedPriceOnly=null;
       const filtered=all.filter(schedule=>schedule.etd.slice(0,10)>=date);
-      const chosen=(filtered.length?filtered:all)[0];
+      if(!filtered.length){
+        state.selectedSchedule=null;
+        state.selectedPriceOnly=null;
+        setBookingButtonState();
+        renderSchedules();
+        clearMapRoute();
+        $("floatingCard").classList.remove("show");
+        setStatus(`${portName(destination)} · ${t("noScheduleAfterDate")}`);
+        return;
+      }
+      const chosen=filtered[0];
       renderSchedules();
       selectSchedule(chosen.id,true,{fit:true});
     }
@@ -4420,6 +4449,6 @@ ${rate.locked?`${t("agreementLocked")}: ${rate.code} · ${rate.customer}`:""}
     setTimeout(()=>map.invalidateSize(),180);
   })();
   </script>
-  <script src="./assets/mobile-v2.js?v=15"></script>
+  <script src="./assets/mobile-v2.js?v=16"></script>
 </body>
 </html>
