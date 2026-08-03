@@ -1444,7 +1444,7 @@
 }
 
   </style>
-  <link rel="stylesheet" href="./assets/mobile-v2.css?v=12" />
+  <link rel="stylesheet" href="./assets/mobile-v2.css?v=13" />
   <style id="mobileEmergencyLayout">
     /* Built-in mobile fallback: prevents the desktop map layout appearing when an old CSS/JS file is cached. */
     @media (max-width:900px), (pointer:coarse) and (hover:none) and (max-width:1180px){
@@ -1670,6 +1670,10 @@
                       <input id="agreementInput" autocomplete="off" placeholder="输入客户协议号" />
                     </div>
                   </div>
+                  <div class="agreement-help agreement-inline-help agreement-input-help">
+                    <strong data-i18n="viewAgreementExamples">查看演示协议号与说明</strong>
+                    <p data-i18n="agreementHelp">不输入协议号时显示市场价；输入有效协议号后，全部目的港自动切换为该客户协议价。（请联系SITC嘉祥获取协议号）演示协议号：MYJXTGL001</p>
+                  </div>
                 </div>
               </div>
 
@@ -1718,10 +1722,6 @@
               </div>
             </div>
 
-            <div class="agreement-help agreement-inline-help">
-              <strong data-i18n="viewAgreementExamples">查看演示协议号与说明</strong>
-              <p data-i18n="agreementHelp">客户不输入协议号时显示公开表价；输入有效协议号并查询后，全部目的港自动切换为该客户协议价。</p>
-            </div>
           </div>
 
           <div class="section-title">
@@ -2969,7 +2969,7 @@
         const scheduleRate=selectedRate(schedule.destination,schedule.etd);
         const pricing=document.createElement("div");
         pricing.className="schedule-rate-summary";
-        pricing.innerHTML=`<div class="schedule-rate-of"><span>OF</span><strong>USD ${Number(scheduleRate.rate20||0)}/${Number(scheduleRate.rate40||0)}</strong><em>20GP/40HC</em></div><div class="schedule-rate-terms"><span>${escapeHtml(scheduleRate.includes||"")}</span><b>FT ${escapeHtml(scheduleRate.ft||"")}</b></div>`;
+        pricing.innerHTML=`<div class="schedule-rate-of"><strong>OF：USD${Number(scheduleRate.rate20||0)}/${Number(scheduleRate.rate40||0)}</strong><em>20GP/40HC</em></div><div class="schedule-rate-terms"><span>${escapeHtml(scheduleRate.includes||"")}</span><b>FT:${escapeHtml(scheduleRate.ft||"")}</b></div>`;
         const actions=document.createElement("div");
         actions.className="schedule-card-actions";
         const quote=document.createElement("button");
@@ -4419,6 +4419,6 @@ ${rate.locked?`${t("agreementLocked")}: ${rate.code} · ${rate.customer}`:""}
     setTimeout(()=>map.invalidateSize(),180);
   })();
   </script>
-  <script src="./assets/mobile-v2.js?v=12"></script>
+  <script src="./assets/mobile-v2.js?v=13"></script>
 </body>
 </html>
