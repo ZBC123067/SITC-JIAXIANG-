@@ -1,0 +1,2094 @@
+{
+  "schema_version": 1,
+  "origin": "Kuching",
+  "ports": {
+    "Kuching": {
+      "zh": "古晋",
+      "en": "Kuching",
+      "code": "MYKCH",
+      "terminal": "KUCHING PORT / SENARI TERMINAL",
+      "lat": 1.575,
+      "lng": 110.445
+    },
+    "HoChiMinh": {
+      "zh": "胡志明市",
+      "en": "Ho Chi Minh",
+      "code": "VNSGN",
+      "terminal": "TAN CANG HIEP PHUOC PORT",
+      "lat": 10.65,
+      "lng": 106.76
+    },
+    "Shekou": {
+      "zh": "蛇口",
+      "en": "Shekou",
+      "code": "CNSHK",
+      "terminal": "SHEKOU CONTAINER TERMINAL",
+      "lat": 22.48,
+      "lng": 113.9
+    },
+    "Shanghai": {
+      "zh": "上海外高桥",
+      "en": "Shanghai Waigaoqiao",
+      "code": "CNSHA",
+      "terminal": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)",
+      "lat": 31.345,
+      "lng": 121.66
+    },
+    "Xingang": {
+      "zh": "天津新港",
+      "en": "Xingang",
+      "code": "CNTXG",
+      "terminal": "TIANJIN XINGANG CONTAINER TERMINAL",
+      "lat": 38.98,
+      "lng": 117.74
+    },
+    "Fuzhou": {
+      "zh": "福州",
+      "en": "Fuzhou",
+      "code": "CNFOC",
+      "terminal": "FUZHOU CONTAINER TERMINAL",
+      "lat": 25.98,
+      "lng": 119.46
+    },
+    "Nansha": {
+      "zh": "南沙",
+      "en": "Nansha",
+      "code": "CNNSA",
+      "terminal": "NANSHA CONTAINER TERMINAL",
+      "lat": 22.67,
+      "lng": 113.67
+    },
+    "Ningbo": {
+      "zh": "宁波北仑",
+      "en": "Ningbo Beilun",
+      "code": "CNNGB",
+      "terminal": "NINGBO BEILUN CONTAINER TERMINAL",
+      "lat": 29.93,
+      "lng": 121.85
+    },
+    "Tokyo": {
+      "zh": "东京",
+      "en": "Tokyo",
+      "code": "JPTYO",
+      "terminal": "TOKYO CONTAINER TERMINAL",
+      "lat": 35.59,
+      "lng": 139.77
+    },
+    "Osaka": {
+      "zh": "大阪",
+      "en": "Osaka",
+      "code": "JPOSA",
+      "terminal": "OSAKA CONTAINER TERMINAL",
+      "lat": 34.64,
+      "lng": 135.27
+    },
+    "Sendai": {
+      "zh": "仙台",
+      "en": "Sendai",
+      "code": "JPSDJ",
+      "terminal": "SENDAI SHIOGAMA PORT",
+      "lat": 38.27,
+      "lng": 141.02
+    },
+    "Yokohama": {
+      "zh": "横滨",
+      "en": "Yokohama",
+      "code": "JPYOK",
+      "terminal": "YOKOHAMA CONTAINER TERMINAL",
+      "lat": 35.45,
+      "lng": 139.65
+    },
+    "Busan": {
+      "zh": "釜山新港",
+      "en": "Busan New Port",
+      "code": "KRPUS",
+      "terminal": "BUSAN NEW PORT",
+      "lat": 35.078,
+      "lng": 128.833
+    },
+    "Incheon": {
+      "zh": "仁川",
+      "en": "Incheon",
+      "code": "KRINC",
+      "terminal": "INCHEON CONTAINER TERMINAL",
+      "lat": 37.45,
+      "lng": 126.62
+    },
+    "Bintulu": {
+      "zh": "民都鲁",
+      "en": "Bintulu",
+      "code": "MYBTU",
+      "terminal": "BINTULU INTERNATIONAL CONTAINER TERMINAL",
+      "lat": 3.3,
+      "lng": 112.975
+    },
+    "Nagoya": {
+      "zh": "名古屋",
+      "en": "Nagoya",
+      "code": "JPNGO",
+      "terminal": "NAGOYA CONTAINER TERMINAL",
+      "lat": 35.03,
+      "lng": 136.84
+    },
+    "Shimizu": {
+      "zh": "清水",
+      "en": "Shimizu",
+      "code": "JPSMZ",
+      "terminal": "SHIMIZU CONTAINER TERMINAL",
+      "lat": 35.0,
+      "lng": 138.5
+    }
+  },
+  "destination_groups": [
+    {
+      "key": "China",
+      "zh": "中国",
+      "en": "China",
+      "ports": [
+        "Fuzhou",
+        "Nansha",
+        "Ningbo",
+        "Shanghai",
+        "Shekou",
+        "Xingang"
+      ]
+    },
+    {
+      "key": "Japan",
+      "zh": "日本",
+      "en": "Japan",
+      "ports": [
+        "Osaka",
+        "Sendai",
+        "Tokyo",
+        "Yokohama"
+      ]
+    },
+    {
+      "key": "SouthKorea",
+      "zh": "韩国",
+      "en": "South Korea",
+      "ports": [
+        "Busan",
+        "Incheon"
+      ]
+    }
+  ],
+  "map_port_keys": [
+    "Kuching",
+    "HoChiMinh",
+    "Shekou",
+    "Shanghai",
+    "Xingang",
+    "Fuzhou",
+    "Nansha",
+    "Ningbo",
+    "Tokyo",
+    "Osaka",
+    "Sendai",
+    "Yokohama",
+    "Busan",
+    "Incheon"
+  ],
+  "sea_paths": {
+    "Kuching-HoChiMinh": [
+      [
+        1.575,
+        110.445
+      ],
+      [
+        3.8,
+        109.7
+      ],
+      [
+        6.8,
+        108.5
+      ],
+      [
+        10.65,
+        106.76
+      ]
+    ],
+    "Kuching-Shekou": [
+      [
+        1.575,
+        110.445
+      ],
+      [
+        5.0,
+        112.0
+      ],
+      [
+        10.0,
+        112.8
+      ],
+      [
+        16.0,
+        113.2
+      ],
+      [
+        22.48,
+        113.9
+      ]
+    ],
+    "HoChiMinh-Incheon": [
+      [
+        10.65,
+        106.76
+      ],
+      [
+        14.5,
+        110.0
+      ],
+      [
+        19.5,
+        114.0
+      ],
+      [
+        24.5,
+        119.0
+      ],
+      [
+        29.5,
+        123.0
+      ],
+      [
+        34.5,
+        126.0
+      ],
+      [
+        37.45,
+        126.62
+      ]
+    ],
+    "HoChiMinh-Tokyo": [
+      [
+        10.65,
+        106.76
+      ],
+      [
+        14.5,
+        110.0
+      ],
+      [
+        19.5,
+        114.0
+      ],
+      [
+        24.0,
+        119.0
+      ],
+      [
+        28.0,
+        124.0
+      ],
+      [
+        32.0,
+        131.0
+      ],
+      [
+        35.59,
+        139.77
+      ]
+    ],
+    "HoChiMinh-Osaka": [
+      [
+        10.65,
+        106.76
+      ],
+      [
+        14.5,
+        110.0
+      ],
+      [
+        19.5,
+        114.0
+      ],
+      [
+        24.0,
+        119.0
+      ],
+      [
+        28.0,
+        124.0
+      ],
+      [
+        32.0,
+        130.0
+      ],
+      [
+        34.64,
+        135.27
+      ]
+    ],
+    "HoChiMinh-Xingang": [
+      [
+        10.65,
+        106.76
+      ],
+      [
+        15.0,
+        111.0
+      ],
+      [
+        20.0,
+        115.0
+      ],
+      [
+        25.0,
+        120.0
+      ],
+      [
+        31.0,
+        122.0
+      ],
+      [
+        36.0,
+        120.0
+      ],
+      [
+        38.98,
+        117.74
+      ]
+    ],
+    "HoChiMinh-Yokohama": [
+      [
+        10.65,
+        106.76
+      ],
+      [
+        14.5,
+        110.0
+      ],
+      [
+        19.5,
+        114.0
+      ],
+      [
+        24.0,
+        119.0
+      ],
+      [
+        28.0,
+        124.0
+      ],
+      [
+        32.0,
+        131.0
+      ],
+      [
+        35.45,
+        139.65
+      ]
+    ],
+    "HoChiMinh-Shanghai": [
+      [
+        10.65,
+        106.76
+      ],
+      [
+        14.0,
+        110.2
+      ],
+      [
+        18.0,
+        113.0
+      ],
+      [
+        22.0,
+        116.0
+      ],
+      [
+        26.0,
+        119.5
+      ],
+      [
+        31.345,
+        121.66
+      ]
+    ],
+    "HoChiMinh-Fuzhou": [
+      [
+        10.65,
+        106.76
+      ],
+      [
+        15.0,
+        111.0
+      ],
+      [
+        19.0,
+        114.0
+      ],
+      [
+        22.0,
+        117.0
+      ],
+      [
+        25.98,
+        119.46
+      ]
+    ],
+    "HoChiMinh-Nansha": [
+      [
+        10.65,
+        106.76
+      ],
+      [
+        14.0,
+        109.5
+      ],
+      [
+        18.0,
+        111.5
+      ],
+      [
+        22.67,
+        113.67
+      ]
+    ],
+    "Shekou-Busan": [
+      [
+        22.48,
+        113.9
+      ],
+      [
+        25.0,
+        118.0
+      ],
+      [
+        29.0,
+        122.0
+      ],
+      [
+        33.0,
+        126.0
+      ],
+      [
+        35.078,
+        128.833
+      ]
+    ],
+    "Shanghai-Sendai": [
+      [
+        31.345,
+        121.66
+      ],
+      [
+        33.0,
+        126.0
+      ],
+      [
+        35.0,
+        132.0
+      ],
+      [
+        37.0,
+        137.0
+      ],
+      [
+        38.27,
+        141.02
+      ]
+    ],
+    "Shanghai-Ningbo": [
+      [
+        31.345,
+        121.66
+      ],
+      [
+        30.8,
+        121.8
+      ],
+      [
+        29.93,
+        121.85
+      ]
+    ],
+    "Bintulu-Shekou": [
+      [
+        3.3,
+        112.975
+      ],
+      [
+        8.0,
+        113.0
+      ],
+      [
+        15.0,
+        113.3
+      ],
+      [
+        22.48,
+        113.9
+      ]
+    ],
+    "Shekou-Nagoya": [
+      [
+        22.48,
+        113.9
+      ],
+      [
+        26.0,
+        120.0
+      ],
+      [
+        30.0,
+        127.0
+      ],
+      [
+        35.03,
+        136.84
+      ]
+    ],
+    "Shekou-Shanghai": [
+      [
+        22.48,
+        113.9
+      ],
+      [
+        26.0,
+        119.0
+      ],
+      [
+        31.345,
+        121.66
+      ]
+    ],
+    "Shanghai-Shimizu": [
+      [
+        31.345,
+        121.66
+      ],
+      [
+        33.0,
+        127.0
+      ],
+      [
+        35.0,
+        138.5
+      ]
+    ]
+  },
+  "price_only_route_nodes": {
+    "Fuzhou": [
+      "Kuching",
+      "HoChiMinh",
+      "Fuzhou"
+    ],
+    "Shekou": [
+      "Kuching",
+      "Shekou"
+    ],
+    "Nansha": [
+      "Kuching",
+      "HoChiMinh",
+      "Nansha"
+    ]
+  },
+  "schedules": {
+    "Incheon": [
+      {
+        "id": "KCH-INC-01",
+        "origin": "Kuching",
+        "destination": "Incheon",
+        "days": 13,
+        "transfers": 1,
+        "etd": "2026-08-09 00:00",
+        "eta": "2026-08-22 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2621N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-09 00:00",
+            "arrive": "2026-08-16 00:00",
+            "duration": "约7天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Incheon",
+            "vessel": "SITC SHENGMING",
+            "voyage": "2611N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-16 00:00",
+            "arrive": "2026-08-22 00:00",
+            "duration": "约6天",
+            "terminalTo": "INCHEON CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-INC-02",
+        "origin": "Kuching",
+        "destination": "Incheon",
+        "days": 9,
+        "transfers": 1,
+        "etd": "2026-08-13 00:00",
+        "eta": "2026-08-22 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "ORIENTAL BRIGHT",
+            "voyage": "2622N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-13 00:00",
+            "arrive": "2026-08-16 00:00",
+            "duration": "约3天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Incheon",
+            "vessel": "SITC SHENGMING",
+            "voyage": "2611N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-16 00:00",
+            "arrive": "2026-08-22 00:00",
+            "duration": "约6天",
+            "terminalTo": "INCHEON CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-INC-03",
+        "origin": "Kuching",
+        "destination": "Incheon",
+        "days": 21,
+        "transfers": 1,
+        "etd": "2026-08-20 00:00",
+        "eta": "2026-09-10 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC HAKATA",
+            "voyage": "2619N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-20 00:00",
+            "arrive": "2026-09-03 00:00",
+            "duration": "约14天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Incheon",
+            "vessel": "SITC YUANMING",
+            "voyage": "2613N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-09-03 00:00",
+            "arrive": "2026-09-10 00:00",
+            "duration": "约7天",
+            "terminalTo": "INCHEON CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-INC-04",
+        "origin": "Kuching",
+        "destination": "Incheon",
+        "days": 14,
+        "transfers": 1,
+        "etd": "2026-08-27 00:00",
+        "eta": "2026-09-10 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2623N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-27 00:00",
+            "arrive": "2026-09-03 00:00",
+            "duration": "约7天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Incheon",
+            "vessel": "SITC YUANMING",
+            "voyage": "2613N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-09-03 00:00",
+            "arrive": "2026-09-10 00:00",
+            "duration": "约7天",
+            "terminalTo": "INCHEON CONTAINER TERMINAL"
+          }
+        ]
+      }
+    ],
+    "Tokyo": [
+      {
+        "id": "KCH-TOK-01",
+        "origin": "Kuching",
+        "destination": "Tokyo",
+        "days": 12,
+        "transfers": 1,
+        "etd": "2026-08-09 00:00",
+        "eta": "2026-08-21 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2621N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-09 00:00",
+            "arrive": "2026-08-13 00:00",
+            "duration": "约4天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Tokyo",
+            "vessel": "SITC KEELUNG",
+            "voyage": "2619N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-13 00:00",
+            "arrive": "2026-08-21 00:00",
+            "duration": "约8天",
+            "terminalTo": "TOKYO CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-TOK-02",
+        "origin": "Kuching",
+        "destination": "Tokyo",
+        "days": 16,
+        "transfers": 1,
+        "etd": "2026-08-13 00:00",
+        "eta": "2026-08-29 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "ORIENTAL BRIGHT",
+            "voyage": "2622N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-13 00:00",
+            "arrive": "2026-08-22 00:00",
+            "duration": "约9天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Tokyo",
+            "vessel": "SITC FUJIAN",
+            "voyage": "2621N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-22 00:00",
+            "arrive": "2026-08-29 00:00",
+            "duration": "约7天",
+            "terminalTo": "TOKYO CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-TOK-03",
+        "origin": "Kuching",
+        "destination": "Tokyo",
+        "days": 15,
+        "transfers": 1,
+        "etd": "2026-08-20 00:00",
+        "eta": "2026-09-04 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC HAKATA",
+            "voyage": "2619N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-20 00:00",
+            "arrive": "2026-08-28 00:00",
+            "duration": "约8天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Tokyo",
+            "vessel": "SITC ZHENGDE",
+            "voyage": "2617N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-28 00:00",
+            "arrive": "2026-09-04 00:00",
+            "duration": "约7天",
+            "terminalTo": "TOKYO CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-TOK-04",
+        "origin": "Kuching",
+        "destination": "Tokyo",
+        "days": 14,
+        "transfers": 1,
+        "etd": "2026-08-27 00:00",
+        "eta": "2026-09-10 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2623N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-27 00:00",
+            "arrive": "2026-09-02 00:00",
+            "duration": "约6天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Tokyo",
+            "vessel": "SITC RUNDE",
+            "voyage": "2619N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-09-02 00:00",
+            "arrive": "2026-09-10 00:00",
+            "duration": "约8天",
+            "terminalTo": "TOKYO CONTAINER TERMINAL"
+          }
+        ]
+      }
+    ],
+    "Osaka": [
+      {
+        "id": "KCH-OSA-01",
+        "origin": "Kuching",
+        "destination": "Osaka",
+        "days": 11,
+        "transfers": 1,
+        "etd": "2026-08-09 00:00",
+        "eta": "2026-08-20 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2621N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-09 00:00",
+            "arrive": "2026-08-12 00:00",
+            "duration": "约3天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Osaka",
+            "vessel": "SITC SHUNDE",
+            "voyage": "2617N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-12 00:00",
+            "arrive": "2026-08-20 00:00",
+            "duration": "约8天",
+            "terminalTo": "OSAKA CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-OSA-02",
+        "origin": "Kuching",
+        "destination": "Osaka",
+        "days": 14,
+        "transfers": 1,
+        "etd": "2026-08-13 00:00",
+        "eta": "2026-08-27 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "ORIENTAL BRIGHT",
+            "voyage": "2622N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-13 00:00",
+            "arrive": "2026-08-18 00:00",
+            "duration": "约5天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Osaka",
+            "vessel": "SITC HOCHIMINH",
+            "voyage": "2617N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-18 00:00",
+            "arrive": "2026-08-27 00:00",
+            "duration": "约9天",
+            "terminalTo": "OSAKA CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-OSA-03",
+        "origin": "Kuching",
+        "destination": "Osaka",
+        "days": 14,
+        "transfers": 1,
+        "etd": "2026-08-20 00:00",
+        "eta": "2026-09-03 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC HAKATA",
+            "voyage": "2619N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-20 00:00",
+            "arrive": "2026-08-25 00:00",
+            "duration": "约5天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Osaka",
+            "vessel": "SITC DALIAN",
+            "voyage": "2629N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-25 00:00",
+            "arrive": "2026-09-03 00:00",
+            "duration": "约9天",
+            "terminalTo": "OSAKA CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-OSA-04",
+        "origin": "Kuching",
+        "destination": "Osaka",
+        "days": 14,
+        "transfers": 1,
+        "etd": "2026-08-27 00:00",
+        "eta": "2026-09-10 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2623N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-27 00:00",
+            "arrive": "2026-09-01 00:00",
+            "duration": "约5天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Osaka",
+            "vessel": "RENOWN",
+            "voyage": "2629N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-09-01 00:00",
+            "arrive": "2026-09-10 00:00",
+            "duration": "约9天",
+            "terminalTo": "OSAKA CONTAINER TERMINAL"
+          }
+        ]
+      }
+    ],
+    "Xingang": [
+      {
+        "id": "KCH-XIN-01",
+        "origin": "Kuching",
+        "destination": "Xingang",
+        "days": 16,
+        "transfers": 1,
+        "etd": "2026-08-09 00:00",
+        "eta": "2026-08-25 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2621N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-09 00:00",
+            "arrive": "2026-08-16 00:00",
+            "duration": "约7天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Xingang",
+            "vessel": "SITC SHENGMING",
+            "voyage": "2611N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-16 00:00",
+            "arrive": "2026-08-25 00:00",
+            "duration": "约9天",
+            "terminalTo": "TIANJIN XINGANG CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-XIN-02",
+        "origin": "Kuching",
+        "destination": "Xingang",
+        "days": 22,
+        "transfers": 1,
+        "etd": "2026-08-13 00:00",
+        "eta": "2026-09-04 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "ORIENTAL BRIGHT",
+            "voyage": "2622N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-13 00:00",
+            "arrive": "2026-08-26 00:00",
+            "duration": "约13天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Xingang",
+            "vessel": "SITC QIUMING",
+            "voyage": "2611N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-26 00:00",
+            "arrive": "2026-09-04 00:00",
+            "duration": "约9天",
+            "terminalTo": "TIANJIN XINGANG CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-XIN-03",
+        "origin": "Kuching",
+        "destination": "Xingang",
+        "days": 15,
+        "transfers": 1,
+        "etd": "2026-08-20 00:00",
+        "eta": "2026-09-04 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC HAKATA",
+            "voyage": "2619N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-20 00:00",
+            "arrive": "2026-08-26 00:00",
+            "duration": "约6天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Xingang",
+            "vessel": "SITC QIUMING",
+            "voyage": "2611N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-26 00:00",
+            "arrive": "2026-09-04 00:00",
+            "duration": "约9天",
+            "terminalTo": "TIANJIN XINGANG CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-XIN-04",
+        "origin": "Kuching",
+        "destination": "Xingang",
+        "days": 16,
+        "transfers": 1,
+        "etd": "2026-08-27 00:00",
+        "eta": "2026-09-12 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2623N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-27 00:00",
+            "arrive": "2026-09-03 00:00",
+            "duration": "约7天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Xingang",
+            "vessel": "SITC YUANMING",
+            "voyage": "2613N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-09-03 00:00",
+            "arrive": "2026-09-12 00:00",
+            "duration": "约9天",
+            "terminalTo": "TIANJIN XINGANG CONTAINER TERMINAL"
+          }
+        ]
+      }
+    ],
+    "Busan": [
+      {
+        "id": "KCH-BUS-01",
+        "origin": "Kuching",
+        "destination": "Busan",
+        "days": 11,
+        "transfers": 1,
+        "etd": "2026-08-09 00:00",
+        "eta": "2026-08-20 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "Shekou",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2621N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-09 00:00",
+            "arrive": "2026-08-17 00:00",
+            "duration": "约8天",
+            "terminalTo": "SHEKOU CONTAINER TERMINAL"
+          },
+          {
+            "from": "Shekou",
+            "to": "Busan",
+            "vessel": "SITC YUNCHENG",
+            "voyage": "2607N",
+            "service": "T/S SHEKOU",
+            "depart": "2026-08-17 00:00",
+            "arrive": "2026-08-20 00:00",
+            "duration": "约3天",
+            "terminalTo": "BUSAN NEW PORT"
+          }
+        ]
+      },
+      {
+        "id": "KCH-BUS-02",
+        "origin": "Kuching",
+        "destination": "Busan",
+        "days": 21,
+        "transfers": 1,
+        "etd": "2026-08-13 00:00",
+        "eta": "2026-09-03 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "Shekou",
+            "vessel": "ORIENTAL BRIGHT",
+            "voyage": "2622N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-13 00:00",
+            "arrive": "2026-08-31 00:00",
+            "duration": "约18天",
+            "terminalTo": "SHEKOU CONTAINER TERMINAL"
+          },
+          {
+            "from": "Shekou",
+            "to": "Busan",
+            "vessel": "KMTC DALIAN",
+            "voyage": "2607N",
+            "service": "T/S SHEKOU",
+            "depart": "2026-08-31 00:00",
+            "arrive": "2026-09-03 00:00",
+            "duration": "约3天",
+            "terminalTo": "BUSAN NEW PORT"
+          }
+        ]
+      },
+      {
+        "id": "KCH-BUS-03",
+        "origin": "Kuching",
+        "destination": "Busan",
+        "days": 11,
+        "transfers": 1,
+        "etd": "2026-08-20 00:00",
+        "eta": "2026-08-31 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "Shekou",
+            "vessel": "SITC HAKATA",
+            "voyage": "2619N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-20 00:00",
+            "arrive": "2026-09-01 00:00",
+            "duration": "约12天",
+            "terminalTo": "SHEKOU CONTAINER TERMINAL"
+          },
+          {
+            "from": "Shekou",
+            "to": "Busan",
+            "vessel": "INTERASIA ENGAGE",
+            "voyage": "N043",
+            "service": "T/S SHEKOU",
+            "depart": "2026-09-01 00:00",
+            "arrive": "2026-08-31 00:00",
+            "duration": "约1天",
+            "terminalTo": "BUSAN NEW PORT"
+          }
+        ]
+      },
+      {
+        "id": "KCH-BUS-04",
+        "origin": "Kuching",
+        "destination": "Busan",
+        "days": 14,
+        "transfers": 1,
+        "etd": "2026-08-27 00:00",
+        "eta": "2026-09-10 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "Shekou",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2623N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-27 00:00",
+            "arrive": "2026-09-06 00:00",
+            "duration": "约10天",
+            "terminalTo": "SHEKOU CONTAINER TERMINAL"
+          },
+          {
+            "from": "Shekou",
+            "to": "Busan",
+            "vessel": "KMTC QINGDAO",
+            "voyage": "2607N",
+            "service": "T/S SHEKOU",
+            "depart": "2026-09-06 00:00",
+            "arrive": "2026-09-10 00:00",
+            "duration": "约4天",
+            "terminalTo": "BUSAN NEW PORT"
+          }
+        ]
+      }
+    ],
+    "Yokohama": [
+      {
+        "id": "KCH-YOK-01",
+        "origin": "Kuching",
+        "destination": "Yokohama",
+        "days": 12,
+        "transfers": 1,
+        "etd": "2026-08-09 00:00",
+        "eta": "2026-08-21 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2621N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-09 00:00",
+            "arrive": "2026-08-13 00:00",
+            "duration": "约4天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Yokohama",
+            "vessel": "SITC KEELUNG",
+            "voyage": "2619N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-13 00:00",
+            "arrive": "2026-08-21 00:00",
+            "duration": "约8天",
+            "terminalTo": "YOKOHAMA CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-YOK-02",
+        "origin": "Kuching",
+        "destination": "Yokohama",
+        "days": 24,
+        "transfers": 1,
+        "etd": "2026-08-13 00:00",
+        "eta": "2026-09-06 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "ORIENTAL BRIGHT",
+            "voyage": "2622N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-13 00:00",
+            "arrive": "2026-08-22 00:00",
+            "duration": "约9天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Yokohama",
+            "vessel": "SITC KANTO",
+            "voyage": "2691N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-22 00:00",
+            "arrive": "2026-09-06 00:00",
+            "duration": "约15天",
+            "terminalTo": "YOKOHAMA CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-YOK-03",
+        "origin": "Kuching",
+        "destination": "Yokohama",
+        "days": 16,
+        "transfers": 1,
+        "etd": "2026-08-20 00:00",
+        "eta": "2026-09-05 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC HAKATA",
+            "voyage": "2619N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-20 00:00",
+            "arrive": "2026-08-28 00:00",
+            "duration": "约8天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Yokohama",
+            "vessel": "SITC ZHENGDE",
+            "voyage": "2617N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-08-28 00:00",
+            "arrive": "2026-09-05 00:00",
+            "duration": "约8天",
+            "terminalTo": "YOKOHAMA CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-YOK-04",
+        "origin": "Kuching",
+        "destination": "Yokohama",
+        "days": 15,
+        "transfers": 1,
+        "etd": "2026-08-27 00:00",
+        "eta": "2026-09-11 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2623N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-27 00:00",
+            "arrive": "2026-09-02 00:00",
+            "duration": "约6天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Yokohama",
+            "vessel": "SITC RUNDE",
+            "voyage": "2619N",
+            "service": "T/S HOCHIMINH",
+            "depart": "2026-09-02 00:00",
+            "arrive": "2026-09-11 00:00",
+            "duration": "约9天",
+            "terminalTo": "YOKOHAMA CONTAINER TERMINAL"
+          }
+        ]
+      }
+    ],
+    "Shanghai": [
+      {
+        "id": "KCH-SHA-01",
+        "origin": "Kuching",
+        "destination": "Shanghai",
+        "days": 9,
+        "transfers": 1,
+        "etd": "2026-08-06 00:00",
+        "eta": "2026-08-15 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2621N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-06 00:00",
+            "arrive": "2026-08-10 00:00",
+            "duration": "约4天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "KOTA NAZAR",
+            "voyage": "2630N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-08-10 00:00",
+            "arrive": "2026-08-15 00:00",
+            "duration": "约5天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          }
+        ]
+      },
+      {
+        "id": "KCH-SHA-02",
+        "origin": "Kuching",
+        "destination": "Shanghai",
+        "days": 15,
+        "transfers": 1,
+        "etd": "2026-08-13 00:00",
+        "eta": "2026-08-28 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "ORIENTAL BRIGHT",
+            "voyage": "2622N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-13 00:00",
+            "arrive": "2026-08-22 00:00",
+            "duration": "约9天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "SUNRISE DRAGON",
+            "voyage": "2621N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-08-22 00:00",
+            "arrive": "2026-08-28 00:00",
+            "duration": "约6天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          }
+        ]
+      },
+      {
+        "id": "KCH-SHA-03",
+        "origin": "Kuching",
+        "destination": "Shanghai",
+        "days": 15,
+        "transfers": 1,
+        "etd": "2026-08-20 00:00",
+        "eta": "2026-09-04 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC HAKATA",
+            "voyage": "2619N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-20 00:00",
+            "arrive": "2026-08-30 00:00",
+            "duration": "约10天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "KOTA NAZAR",
+            "voyage": "2634N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-08-30 00:00",
+            "arrive": "2026-09-04 00:00",
+            "duration": "约5天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          }
+        ]
+      },
+      {
+        "id": "KCH-SHA-04",
+        "origin": "Kuching",
+        "destination": "Shanghai",
+        "days": 15,
+        "transfers": 1,
+        "etd": "2026-08-27 00:00",
+        "eta": "2026-09-11 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2623N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-27 00:00",
+            "arrive": "2026-09-05 00:00",
+            "duration": "约9天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "HONG AN",
+            "voyage": "262N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-09-05 00:00",
+            "arrive": "2026-09-11 00:00",
+            "duration": "约6天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          }
+        ]
+      }
+    ],
+    "Sendai": [
+      {
+        "id": "KCH-SEN-01",
+        "origin": "Kuching",
+        "destination": "Sendai",
+        "days": 15,
+        "transfers": 2,
+        "etd": "2026-08-06 00:00",
+        "eta": "2026-08-21 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2621N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-06 00:00",
+            "arrive": "2026-08-10 00:00",
+            "duration": "约4天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "KOTA NAZAR",
+            "voyage": "2630N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-08-10 00:00",
+            "arrive": "2026-08-15 00:00",
+            "duration": "约5天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          },
+          {
+            "from": "Shanghai",
+            "to": "Sendai",
+            "vessel": "SITC SHIMIZU",
+            "voyage": "2622E",
+            "service": "T/S SHANGHAI",
+            "depart": "2026-08-17 00:00",
+            "arrive": "2026-08-21 00:00",
+            "duration": "约4天",
+            "terminalTo": "SENDAI SHIOGAMA PORT"
+          }
+        ]
+      },
+      {
+        "id": "KCH-SEN-02",
+        "origin": "Kuching",
+        "destination": "Sendai",
+        "days": 29,
+        "transfers": 2,
+        "etd": "2026-08-13 00:00",
+        "eta": "2026-09-11 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "ORIENTAL BRIGHT",
+            "voyage": "2622N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-13 00:00",
+            "arrive": "2026-08-22 00:00",
+            "duration": "约9天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "SUNRISE DRAGON",
+            "voyage": "2621N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-08-22 00:00",
+            "arrive": "2026-08-28 00:00",
+            "duration": "约6天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          },
+          {
+            "from": "Shanghai",
+            "to": "Sendai",
+            "vessel": "UNION TIANJIN",
+            "voyage": "2641E",
+            "service": "T/S SHANGHAI",
+            "depart": "2026-09-05 00:00",
+            "arrive": "2026-09-11 00:00",
+            "duration": "约6天",
+            "terminalTo": "SENDAI SHIOGAMA PORT"
+          }
+        ]
+      },
+      {
+        "id": "KCH-SEN-03",
+        "origin": "Kuching",
+        "destination": "Sendai",
+        "days": 29,
+        "transfers": 2,
+        "etd": "2026-08-20 00:00",
+        "eta": "2026-09-18 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC HAKATA",
+            "voyage": "2619N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-20 00:00",
+            "arrive": "2026-08-30 00:00",
+            "duration": "约10天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "KOTA NAZAR",
+            "voyage": "2634N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-08-30 00:00",
+            "arrive": "2026-09-04 00:00",
+            "duration": "约5天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          },
+          {
+            "from": "Shanghai",
+            "to": "Sendai",
+            "vessel": "SITC SHIMIZU",
+            "voyage": "2626E",
+            "service": "T/S SHANGHAI",
+            "depart": "2026-09-12 00:00",
+            "arrive": "2026-09-18 00:00",
+            "duration": "约6天",
+            "terminalTo": "SENDAI SHIOGAMA PORT"
+          }
+        ]
+      },
+      {
+        "id": "KCH-SEN-04",
+        "origin": "Kuching",
+        "destination": "Sendai",
+        "days": 29,
+        "transfers": 2,
+        "etd": "2026-08-27 00:00",
+        "eta": "2026-09-25 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2623N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-27 00:00",
+            "arrive": "2026-09-05 00:00",
+            "duration": "约9天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "HONG AN",
+            "voyage": "262N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-09-05 00:00",
+            "arrive": "2026-09-11 00:00",
+            "duration": "约6天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          },
+          {
+            "from": "Shanghai",
+            "to": "Sendai",
+            "vessel": "UNION TIANJIN",
+            "voyage": "2643E",
+            "service": "T/S SHANGHAI",
+            "depart": "2026-09-19 00:00",
+            "arrive": "2026-09-25 00:00",
+            "duration": "约6天",
+            "terminalTo": "SENDAI SHIOGAMA PORT"
+          }
+        ]
+      }
+    ],
+    "Ningbo": [
+      {
+        "id": "KCH-NGB-01",
+        "origin": "Kuching",
+        "destination": "Ningbo",
+        "days": 17,
+        "transfers": 2,
+        "etd": "2026-08-09 00:00",
+        "eta": "2026-08-26 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2621N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-09 00:00",
+            "arrive": "2026-08-15 00:00",
+            "duration": "约6天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "HONG AN",
+            "voyage": "2620N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-08-15 00:00",
+            "arrive": "2026-08-21 00:00",
+            "duration": "约6天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          },
+          {
+            "from": "Shanghai",
+            "to": "Ningbo",
+            "vessel": "RESURGENCE",
+            "voyage": "2616S",
+            "service": "T/S SHANGHAI",
+            "depart": "2026-08-25 00:00",
+            "arrive": "2026-08-26 00:00",
+            "duration": "约1天",
+            "terminalTo": "NINGBO BEILUN CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-NGB-02",
+        "origin": "Kuching",
+        "destination": "Ningbo",
+        "days": 20,
+        "transfers": 2,
+        "etd": "2026-08-13 00:00",
+        "eta": "2026-09-02 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "ORIENTAL BRIGHT",
+            "voyage": "2622N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-13 00:00",
+            "arrive": "2026-08-22 00:00",
+            "duration": "约9天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "SUNRISE DRAGON",
+            "voyage": "2621N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-08-22 00:00",
+            "arrive": "2026-08-28 00:00",
+            "duration": "约6天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          },
+          {
+            "from": "Shanghai",
+            "to": "Ningbo",
+            "vessel": "SITC HO CHI MINH",
+            "voyage": "2618S",
+            "service": "T/S SHANGHAI",
+            "depart": "2026-09-01 00:00",
+            "arrive": "2026-09-02 00:00",
+            "duration": "约1天",
+            "terminalTo": "NINGBO BEILUN CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-NGB-03",
+        "origin": "Kuching",
+        "destination": "Ningbo",
+        "days": 13,
+        "transfers": 2,
+        "etd": "2026-08-20 00:00",
+        "eta": "2026-09-02 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC HAKATA",
+            "voyage": "2619N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-20 00:00",
+            "arrive": "2026-08-22 00:00",
+            "duration": "约2天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "SUNRISE DRAGON",
+            "voyage": "2621N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-08-22 00:00",
+            "arrive": "2026-08-28 00:00",
+            "duration": "约6天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          },
+          {
+            "from": "Shanghai",
+            "to": "Ningbo",
+            "vessel": "SITC HO CHI MINH",
+            "voyage": "2618S",
+            "service": "T/S SHANGHAI",
+            "depart": "2026-09-01 00:00",
+            "arrive": "2026-09-02 00:00",
+            "duration": "约1天",
+            "terminalTo": "NINGBO BEILUN CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-NGB-04",
+        "origin": "Kuching",
+        "destination": "Ningbo",
+        "days": 13,
+        "transfers": 2,
+        "etd": "2026-08-27 00:00",
+        "eta": "2026-09-09 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2623N",
+            "service": "KCH FEEDER",
+            "depart": "2026-08-27 00:00",
+            "arrive": "2026-08-30 00:00",
+            "duration": "约3天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "KOTA NAZAR",
+            "voyage": "2634N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-08-30 00:00",
+            "arrive": "2026-09-04 00:00",
+            "duration": "约5天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          },
+          {
+            "from": "Shanghai",
+            "to": "Ningbo",
+            "vessel": "SITC DALIAN",
+            "voyage": "2630S",
+            "service": "T/S SHANGHAI",
+            "depart": "2026-09-08 00:00",
+            "arrive": "2026-09-09 00:00",
+            "duration": "约1天",
+            "terminalTo": "NINGBO BEILUN CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-NGB-05",
+        "origin": "Kuching",
+        "destination": "Ningbo",
+        "days": 22,
+        "transfers": 2,
+        "etd": "2026-09-03 00:00",
+        "eta": "2026-09-25 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "ORIENTAL BRIGHT",
+            "voyage": "2624N",
+            "service": "KCH FEEDER",
+            "depart": "2026-09-03 00:00",
+            "arrive": "2026-09-13 00:00",
+            "duration": "约10天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "SUNRISE DRAGON",
+            "voyage": "2623N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-09-13 00:00",
+            "arrive": "2026-09-19 00:00",
+            "duration": "约6天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          },
+          {
+            "from": "Shanghai",
+            "to": "Ningbo",
+            "vessel": "SITC MACAO",
+            "voyage": "2620S",
+            "service": "T/S SHANGHAI",
+            "depart": "2026-09-24 00:00",
+            "arrive": "2026-09-25 00:00",
+            "duration": "约1天",
+            "terminalTo": "NINGBO BEILUN CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-NGB-06",
+        "origin": "Kuching",
+        "destination": "Ningbo",
+        "days": 22,
+        "transfers": 2,
+        "etd": "2026-09-10 00:00",
+        "eta": "2026-10-02 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC HAKATA",
+            "voyage": "2621N",
+            "service": "KCH FEEDER",
+            "depart": "2026-09-10 00:00",
+            "arrive": "2026-09-19 00:00",
+            "duration": "约9天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "KOTA NAZAR",
+            "voyage": "2637N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-09-19 00:00",
+            "arrive": "2026-09-25 00:00",
+            "duration": "约6天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          },
+          {
+            "from": "Shanghai",
+            "to": "Ningbo",
+            "vessel": "SITC XINGDE",
+            "voyage": "2622S",
+            "service": "T/S SHANGHAI",
+            "depart": "2026-10-01 00:00",
+            "arrive": "2026-10-02 00:00",
+            "duration": "约1天",
+            "terminalTo": "NINGBO BEILUN CONTAINER TERMINAL"
+          }
+        ]
+      },
+      {
+        "id": "KCH-NGB-07",
+        "origin": "Kuching",
+        "destination": "Ningbo",
+        "days": 22,
+        "transfers": 2,
+        "etd": "2026-09-17 00:00",
+        "eta": "2026-10-09 00:00",
+        "legs": [
+          {
+            "from": "Kuching",
+            "to": "HoChiMinh",
+            "vessel": "SITC RIZHAO",
+            "voyage": "2625N",
+            "service": "KCH FEEDER",
+            "depart": "2026-09-17 00:00",
+            "arrive": "2026-09-26 00:00",
+            "duration": "约9天",
+            "terminalTo": "TAN CANG HIEP PHUOC PORT"
+          },
+          {
+            "from": "HoChiMinh",
+            "to": "Shanghai",
+            "vessel": "SITC BRAVE",
+            "voyage": "2623N",
+            "service": "T/S HO CHI MINH",
+            "depart": "2026-09-26 00:00",
+            "arrive": "2026-10-04 00:00",
+            "duration": "约8天",
+            "terminalTo": "SHANGHAI PUDONG INTERNATIONAL CONTAINER TERMINAL (WAIGAOQIAO)"
+          },
+          {
+            "from": "Shanghai",
+            "to": "Ningbo",
+            "vessel": "SITC KANTO",
+            "voyage": "2622S",
+            "service": "T/S SHANGHAI",
+            "depart": "2026-10-08 00:00",
+            "arrive": "2026-10-09 00:00",
+            "duration": "约1天",
+            "terminalTo": "NINGBO BEILUN CONTAINER TERMINAL"
+          }
+        ]
+      }
+    ],
+    "Fuzhou": [],
+    "Shekou": [],
+    "Nansha": []
+  },
+  "base_rates": {
+    "Xingang": {
+      "rate20": 400,
+      "rate40": 600,
+      "includes": "INCL LSS EBS +AFS30",
+      "ft": "0+14"
+    },
+    "Shanghai": {
+      "rate20": 300,
+      "rate40": 500,
+      "includes": "INCL LSS EBS +AFS30",
+      "ft": "0+14"
+    },
+    "Fuzhou": {
+      "rate20": 440,
+      "rate40": 710,
+      "includes": "INCL LSS EBS +AFS30",
+      "ft": "0+14"
+    },
+    "Shekou": {
+      "rate20": 250,
+      "rate40": 450,
+      "includes": "INCL LSS EBS +AFS30",
+      "ft": "0+14"
+    },
+    "Yokohama": {
+      "rate20": 400,
+      "rate40": 650,
+      "includes": "INCL LSS EBS +AFS30",
+      "ft": "14+7"
+    },
+    "Osaka": {
+      "rate20": 400,
+      "rate40": 650,
+      "includes": "INCL LSS EBS +AFS30",
+      "ft": "14+7"
+    },
+    "Sendai": {
+      "rate20": 500,
+      "rate40": 750,
+      "includes": "INCL LSS EBS +AFS30",
+      "ft": "14+7"
+    },
+    "Tokyo": {
+      "rate20": 400,
+      "rate40": 650,
+      "includes": "INCL LSS EBS +AFS30",
+      "ft": "14+7"
+    },
+    "Busan": {
+      "rate20": 400,
+      "rate40": 600,
+      "includes": "LSS, KREBS, KRCIC, KRCIS EBS",
+      "ft": "8+8"
+    },
+    "Incheon": {
+      "rate20": 400,
+      "rate40": 600,
+      "includes": "LSS, KREBS, KRCIC, KRCIS EBS",
+      "ft": "8+8"
+    },
+    "Nansha": {
+      "rate20": 250,
+      "rate40": 450,
+      "includes": "INCL LSS EBS +AFS30",
+      "ft": "0+14"
+    },
+    "Ningbo": {
+      "rate20": 300,
+      "rate40": 500,
+      "includes": "INCL LSS EBS +AFS30",
+      "ft": "0+14"
+    }
+  }
+}
