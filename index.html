@@ -191,14 +191,6 @@
     .nav-tab.active{color:#fff;background:var(--blue);box-shadow:0 8px 18px rgba(0,122,255,.22)}
     .top-spacer{flex:1}
     .top-actions{display:flex;align-items:center;gap:7px}
-    .desktop-booking-quick{
-      min-height:40px;padding:0 14px;border:0;border-radius:999px;color:#fff;
-      background:linear-gradient(135deg,#ffae2c,#ff8d00);box-shadow:0 8px 18px rgba(255,145,0,.22);
-      font-size:11px;font-weight:850;white-space:nowrap;transition:transform .2s ease,filter .2s ease
-    }
-    .desktop-booking-quick:hover:not(:disabled){filter:brightness(1.04);transform:translateY(-1px)}
-    .desktop-booking-quick:active:not(:disabled){transform:scale(.97)}
-    .desktop-booking-quick:disabled{cursor:not-allowed;opacity:.48;box-shadow:none}
     .icon-btn{
       width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);
       border-radius:50%;background:rgba(255,255,255,.38);backdrop-filter:blur(18px);
@@ -1449,7 +1441,7 @@
 }
 
   </style>
-  <link rel="stylesheet" href="./assets/mobile-v2.css?v=10" />
+  <link rel="stylesheet" href="./assets/mobile-v2.css?v=11" />
   <style id="mobileEmergencyLayout">
     /* Built-in mobile fallback: prevents the desktop map layout appearing when an old CSS/JS file is cached. */
     @media (max-width:900px), (pointer:coarse) and (hover:none) and (max-width:1180px){
@@ -1525,9 +1517,6 @@
 
       <div class="top-actions">
         <button class="icon-btn" id="languageButton" type="button" aria-label="切换语言"><b>EN</b></button>
-        <button class="desktop-booking-quick" id="desktopBookingButton" type="button" disabled>
-          <span data-i18n="bookNow">一键订舱</span>
-        </button>
         <button class="customer-account-button" id="customerAccountButton" type="button" aria-label="客户登录">
           <span class="customer-account-status-dot" aria-hidden="true"></span>
           <span id="customerAccountLabel" data-i18n="customerLogin">客户登录</span>
@@ -2039,6 +2028,8 @@
     const LOCAL_DEMO_AGREEMENTS = [{"code":"MYJXTGL001","customer":"TGL","rates":{"Xingang":{"rate20":320,"rate40":570},"Shanghai":{"rate20":300,"rate40":480},"Fuzhou":{"rate20":440,"rate40":690},"Shekou":{"rate20":250,"rate40":430},"Yokohama":{"rate20":335,"rate40":565},"Osaka":{"rate20":280,"rate40":520},"Sendai":{"rate20":500,"rate40":730},"Tokyo":{"rate20":280,"rate40":520},"Busan":{"rate20":300,"rate40":630},"Incheon":{"rate20":320,"rate40":530},"Nansha":{"rate20":250,"rate40":430},"Ningbo":{"rate20":300,"rate40":500}}}];
 
     let DEFAULT_AGREEMENTS = structuredClone(LOCAL_DEMO_AGREEMENTS);
+    // Period rules are matched against each sailing's ETD, not today's date.
+    let DEFAULT_BASE_RATE_PERIODS = [];
 
     const CVM_PORT_OVERRIDES = {
       Qinzhou:{zh:"钦州",en:"Qinzhou",code:"CNQZH",terminal:"QINZHOU PORT",lat:21.72,lng:108.60},
@@ -2215,6 +2206,7 @@
       PRICE_ONLY_ROUTE_NODES=dataset.price_only_route_nodes||PRICE_ONLY_ROUTE_NODES;
       SCHEDULES=dataset.schedules||SCHEDULES;
       DEFAULT_BASE_RATES=dataset.base_rates||DEFAULT_BASE_RATES;
+      DEFAULT_BASE_RATE_PERIODS=Array.isArray(dataset.base_rate_periods)?dataset.base_rate_periods:DEFAULT_BASE_RATE_PERIODS;
       state.baseRates=structuredClone(DEFAULT_BASE_RATES);
       return true;
     }
@@ -2848,17 +2840,33 @@
       fitRoute(false);
     }
 
-    function selectedRate(destination){
+    function scheduleRateDate(value){return String(value||"").slice(0,10)}
+    function effectiveRate(baseRate,periods,etd){
+      const sailingDate=scheduleRateDate(etd);
+      if(!sailingDate||!Array.isArray(periods))return {...baseRate};
+      const matched=periods.filter(period=>{
+        const from=scheduleRateDate(period.valid_from||period.validFrom);
+        const to=scheduleRateDate(period.valid_to||period.validTo);
+        return (!from||sailingDate>=from)&&(!to||sailingDate<=to);
+      }).sort((a,b)=>scheduleRateDate(b.valid_from||b.validFrom).localeCompare(scheduleRateDate(a.valid_from||a.validFrom)))[0];
+      return matched?{...baseRate,...matched}:{...baseRate};
+    }
+    function selectedRate(destination,etd=""){
       const code=$("agreementInput").value.trim().toUpperCase();
-      const publicRate=state.baseRates[destination]||DEFAULT_BASE_RATES[destination];
+      const publicPeriods=DEFAULT_BASE_RATE_PERIODS.filter(period=>period.destination===destination);
+      const publicRate=effectiveRate(state.baseRates[destination]||DEFAULT_BASE_RATES[destination]||{},publicPeriods,etd);
       state.activeAgreement=null;
       if(!code)return {...publicRate,locked:false};
       if(state.agreementLookupStatus==="loading")return {...publicRate,pending:true,locked:false};
       const agreement=state.cloudAgreement;
       const customerRate=agreement&&agreement.code===code&&agreement.rates&&agreement.rates[destination];
-      if(state.agreementLookupStatus==="valid"&&agreement&&customerRate){
+      const agreementDate=scheduleRateDate(etd)||new Date().toISOString().slice(0,10);
+      const agreementValid=agreement&&(!agreement.validFrom||agreement.validFrom<=agreementDate)&&(!agreement.validTo||agreement.validTo>=agreementDate);
+      if(state.agreementLookupStatus==="valid"&&agreement&&customerRate&&agreementValid){
         state.activeAgreement=agreement;
-        return {...publicRate,rate20:Number(customerRate.rate20),rate40:Number(customerRate.rate40),locked:true,customer:agreement.customer,code:agreement.code};
+        const agreementPeriods=[...(Array.isArray(agreement.rates.__periods)?agreement.rates.__periods:[]),...(Array.isArray(customerRate.periods)?customerRate.periods:[])].filter(period=>period.destination===destination||!period.destination);
+        const agreementRate=effectiveRate({...publicRate,...customerRate},agreementPeriods,etd);
+        return {...agreementRate,rate20:Number(agreementRate.rate20),rate40:Number(agreementRate.rate40),locked:true,customer:agreement.customer,code:agreement.code};
       }
       if(state.agreementLookupStatus==="idle")return {...publicRate,pending:true,locked:false};
       return {...publicRate,invalid:true,locked:false};
@@ -2914,6 +2922,19 @@
         return `<article class="schedule-card ${state.selectedSchedule?.id===s.id?"active open":""}" data-id="${s.id}"><div class="schedule-top"><div class="port-block"><small>${escapeHtml(portName(s.origin))}</small><strong>${escapeHtml(s.etd.split(" ")[0])}</strong></div><div class="mini-ship"><svg viewBox="0 0 48 48"><path d="M7 29h34l-6 9H13l-6-9Z"/><path d="M15 15h7v12h-7zM24 9h7v18h-7zM33 17h5v10h-5z"/></svg></div><div class="port-block"><small>${escapeHtml(portName(s.destination))}</small><strong>${escapeHtml(s.eta.split(" ")[0])}</strong></div><div class="duration"><strong>${s.days} ${state.lang==="zh"?"天":"days"}</strong><small>${s.transfers} ${t("transit")}</small></div></div><div class="schedule-meta"><span class="tag route-tag">${escapeHtml(services)}</span></div><div class="route-detail"><div class="timeline">${nodes}</div></div></article>`;
       }).join("");
       document.querySelectorAll(".schedule-card").forEach(card=>card.addEventListener("click",()=>selectSchedule(card.dataset.id,true)));
+      document.querySelectorAll(".schedule-card").forEach(card=>{
+        const schedule=findSchedule(card.dataset.id);
+        if(!schedule)return;
+        const scheduleRate=selectedRate(schedule.destination,schedule.etd);
+        const pricing=document.createElement("div");
+        pricing.className="schedule-rate-summary";
+        const title=state.lang==="zh"?"\u8fd0\u4ef7\u548c\u6761\u6b3e":"Rate & terms";
+        pricing.innerHTML=`<div><span>${title}</span><strong>20GP USD ${Number(scheduleRate.rate20||0)} \u00b7 40HC USD ${Number(scheduleRate.rate40||0)}</strong></div><small>${escapeHtml(scheduleRate.includes||"")} \u00b7 FT ${escapeHtml(scheduleRate.ft||"")}</small>`;
+        const book=document.createElement("button");
+        book.type="button";book.className="schedule-book-button";book.textContent=t("bookNow");
+        book.addEventListener("click",event=>{event.stopPropagation();selectSchedule(schedule.id,false,{fit:false});openBookingDrawer()});
+        card.append(pricing,book);
+      });
     }
     function findSchedule(id){
       return Object.values(SCHEDULES).flat().find(schedule=>schedule.id===id);
@@ -2941,7 +2962,7 @@
       setTimeout(()=>setStatus(t("routeShown")),180);
     }
     function renderFloatingSchedule(schedule){
-      const rate=selectedRate(schedule.destination);
+      const rate=selectedRate(schedule.destination,schedule.etd);
       const routePorts=[schedule.origin,...schedule.legs.map(leg=>leg.to)];
       const intermediate=routePorts.slice(1,-1);
       $("floatKicker").textContent=rate.locked?`★ ${t("agreementLocked")} · ${rate.code}`:"★ 推荐方案";
@@ -3964,14 +3985,14 @@ ${rate.locked?`${t("agreementLocked")}: ${rate.code} · ${rate.customer}`:""}
     function bookingContext(){
       const schedule=state.selectedSchedule;
       if(!schedule)return null;
-      const rate=selectedRate(schedule.destination);
+      const rate=selectedRate(schedule.destination,schedule.etd);
       const routePorts=[schedule.origin,...schedule.legs.map(leg=>leg.to)];
       const vessels=[...new Map(schedule.legs.map(leg=>[`${leg.vessel}|${leg.voyage}`,{vessel:leg.vessel,voyage:leg.voyage,service:leg.service}])).values()];
       return {schedule,rate,routePorts,vessels};
     }
     function setBookingButtonState(){
       const enabled=Boolean(state.selectedSchedule&&state.view==="schedule");
-      [$("bookingButton"),$("desktopBookingButton")].filter(Boolean).forEach(button=>{
+      [$("bookingButton")].filter(Boolean).forEach(button=>{
         button.disabled=!enabled;
         button.title=enabled?t("bookNow"):t("noScheduleBooking");
         button.setAttribute("aria-label",button.title);
@@ -4185,7 +4206,6 @@ ${rate.locked?`${t("agreementLocked")}: ${rate.code} · ${rate.customer}`:""}
     $("editCustomerEmailSettingsButton").addEventListener("click",openCustomerAccount);
 
     $("bookingButton").addEventListener("click",openBookingDrawer);
-    $("desktopBookingButton").addEventListener("click",openBookingDrawer);
     $("closeBookingButton").addEventListener("click",closeBookingDrawer);
     $("cancelBookingButton").addEventListener("click",closeBookingDrawer);
     $("bookingBackdrop").addEventListener("click",event=>{if(event.target===$("bookingBackdrop"))closeBookingDrawer()});
@@ -4316,7 +4336,10 @@ ${rate.locked?`${t("agreementLocked")}: ${rate.code} · ${rate.customer}`:""}
     $("copyQuoteButton").addEventListener("click",copyQuote);
     $("adminButton").addEventListener("click",()=>{
       const target=((cloudConfig().adminPath||"./admin.html")+"").trim()||"./admin.html";
-      try{ window.location.href=new URL(target,window.location.href).href; }
+      const base=(location.pathname.endsWith("/")||/\/index\.html$/i.test(location.pathname))
+        ?window.location.href
+        :`${location.origin}${location.pathname}/`;
+      try{ window.location.href=new URL(target,base).href; }
       catch{ window.location.href="./admin.html"; }
     });
     $("closeAdminButton").addEventListener("click",()=>$("adminModal").classList.remove("show"));
@@ -4343,6 +4366,6 @@ ${rate.locked?`${t("agreementLocked")}: ${rate.code} · ${rate.customer}`:""}
     setTimeout(()=>map.invalidateSize(),180);
   })();
   </script>
-  <script src="./assets/mobile-v2.js?v=10"></script>
+  <script src="./assets/mobile-v2.js?v=11"></script>
 </body>
 </html>
