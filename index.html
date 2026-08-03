@@ -422,6 +422,9 @@
       content:"⌄";margin-left:auto;font-size:12px;transition:transform .2s ease
     }
     .agreement-help p{margin:7px 1px 0;color:var(--muted);font-size:8px;line-height:1.55}
+    .agreement-inline-help{padding:9px 10px;border:1px solid color-mix(in srgb,var(--blue) 14%,var(--line));border-radius:12px;background:color-mix(in srgb,var(--blue) 4%,transparent)}
+    .agreement-inline-help strong{display:block;color:var(--blue);font-size:9px;font-weight:800}
+    .agreement-inline-help p{margin:4px 0 0}
     .helper{margin:9px 2px 0;color:var(--muted);font-size:9px;line-height:1.45}
 
     .section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:16px 3px 9px}
@@ -1441,7 +1444,7 @@
 }
 
   </style>
-  <link rel="stylesheet" href="./assets/mobile-v2.css?v=11" />
+  <link rel="stylesheet" href="./assets/mobile-v2.css?v=12" />
   <style id="mobileEmergencyLayout">
     /* Built-in mobile fallback: prevents the desktop map layout appearing when an old CSS/JS file is cached. */
     @media (max-width:900px), (pointer:coarse) and (hover:none) and (max-width:1180px){
@@ -1715,10 +1718,10 @@
               </div>
             </div>
 
-            <details class="agreement-help">
-              <summary data-i18n="viewAgreementExamples">查看演示协议号与说明</summary>
+            <div class="agreement-help agreement-inline-help">
+              <strong data-i18n="viewAgreementExamples">查看演示协议号与说明</strong>
               <p data-i18n="agreementHelp">客户不输入协议号时显示公开表价；输入有效协议号并查询后，全部目的港自动切换为该客户协议价。</p>
-            </details>
+            </div>
           </div>
 
           <div class="section-title">
@@ -2125,6 +2128,26 @@
       }
     };
 
+    /* Test-version terminology and agreement guidance are kept here so the
+       desktop and mobile views always read the same shared translation data. */
+    TEXT.zh.publicRates="市场价";
+    TEXT.zh.publicRatesHint="不输入协议号时显示市场价";
+    TEXT.zh.baseRate="市场价";
+    TEXT.zh.exportPublicTariff="导出市场价 Excel";
+    TEXT.zh.publicTariffExcelDownloaded="市场价 Excel 已下载";
+    TEXT.zh.rateExportHint="不输入协议号导出市场价，输入协议号导出协议价";
+    TEXT.zh.invalidAgreement="协议号无效或与航线不匹配，当前显示市场价";
+    TEXT.zh.rateMaintenanceSub="维护古晋市场价，以及按客户协议号管理的全部目的港价格矩阵。";
+    TEXT.zh.agreementHelp="不输入协议号时显示市场价；输入有效协议号后，全部目的港自动切换为该客户协议价。（请联系SITC嘉祥获取协议号）演示协议号：MYJXTGL001";
+    TEXT.en.publicRates="Market rate";
+    TEXT.en.publicRatesHint="Shown when no agreement is entered";
+    TEXT.en.baseRate="Market rate";
+    TEXT.en.exportPublicTariff="Export market rates to Excel";
+    TEXT.en.publicTariffExcelDownloaded="Market rate Excel downloaded";
+    TEXT.en.rateExportHint="Export market rates without an agreement, or customer rates with one";
+    TEXT.en.invalidAgreement="The agreement is invalid or does not match this route; market rates are shown";
+    TEXT.en.agreementHelp="Without an agreement number, market rates are shown. A valid agreement applies that customer's rates to all destinations. Contact SITC JIAXIANG for an agreement number. Demo: MYJXTGL001";
+
     const PROGRESS_STEPS = [
       {zh:"放箱中",en:"Released",icon:'<path d="M4 8h16v12H4zM8 8V5h8v3M8 12h8M8 16h8"/>'},
       {zh:"进场中",en:"Gate in",icon:'<path d="m4 8 8-4 8 4-8 4-8-4ZM4 8v8l8 4 8-4V8M12 12v8"/>'},
@@ -2210,9 +2233,21 @@
       state.baseRates=structuredClone(DEFAULT_BASE_RATES);
       return true;
     }
+    function loadTestDataset(){
+      try{
+        const dataset=JSON.parse(localStorage.getItem("sitc-jiaxiang-test-dataset-v12")||"null");
+        return dataset&&typeof dataset==="object"?dataset:null;
+      }catch{return null}
+    }
     async function loadCloudDataset(){
       const client=createCloudClient();
       if(!client){
+        const testDataset=loadTestDataset();
+        if(testDataset&&applyCloudDataset(testDataset)){
+          state.cloudMode="test";
+          setCloudBadge("",state.lang==="zh"?"测试版本机数据已加载":"Test data loaded on this device");
+          return true;
+        }
         state.cloudMode="fallback";
         setCloudBadge("",t("cloudFallback"));
         return false;
@@ -2242,7 +2277,8 @@
         return true;
       }
       if(!force&&state.cloudAgreement&&state.cloudAgreement.code===code&&state.agreementLookupStatus==="valid")return true;
-      const localAgreement=LOCAL_DEMO_AGREEMENTS.find(item=>String(item.code).toUpperCase()===code);
+      const testAgreements=(()=>{try{return JSON.parse(localStorage.getItem("sitc-jiaxiang-test-agreements-v12")||"[]")||[]}catch{return []}})();
+      const localAgreement=[...testAgreements,...LOCAL_DEMO_AGREEMENTS].find(item=>String(item.code).toUpperCase()===code);
       const useLocalAgreement=()=>{
         if(!localAgreement)return false;
         state.cloudAgreement=structuredClone(localAgreement);
@@ -2447,7 +2483,12 @@
         return {...structuredClone(DEFAULT_BASE_RATES),...(saved||{})};
       }catch{return structuredClone(DEFAULT_BASE_RATES)}
     }
-    function loadAgreements(){ return structuredClone(LOCAL_DEMO_AGREEMENTS); }
+    function loadAgreements(){
+      try{
+        const stored=JSON.parse(localStorage.getItem("sitc-jiaxiang-test-agreements-v12")||"[]")||[];
+        return structuredClone([...stored,...LOCAL_DEMO_AGREEMENTS]);
+      }catch{return structuredClone(LOCAL_DEMO_AGREEMENTS)}
+    }
     function setTiles(){
       if(state.tileLayer && map.hasLayer(state.tileLayer)) map.removeLayer(state.tileLayer);
       if(map.hasLayer(osmTiles)) map.removeLayer(osmTiles);
@@ -2928,12 +2969,22 @@
         const scheduleRate=selectedRate(schedule.destination,schedule.etd);
         const pricing=document.createElement("div");
         pricing.className="schedule-rate-summary";
-        const title=state.lang==="zh"?"\u8fd0\u4ef7\u548c\u6761\u6b3e":"Rate & terms";
-        pricing.innerHTML=`<div><span>${title}</span><strong>20GP USD ${Number(scheduleRate.rate20||0)} \u00b7 40HC USD ${Number(scheduleRate.rate40||0)}</strong></div><small>${escapeHtml(scheduleRate.includes||"")} \u00b7 FT ${escapeHtml(scheduleRate.ft||"")}</small>`;
+        pricing.innerHTML=`<div class="schedule-rate-of"><span>OF</span><strong>USD ${Number(scheduleRate.rate20||0)}/${Number(scheduleRate.rate40||0)}</strong><em>20GP/40HC</em></div><div class="schedule-rate-terms"><span>${escapeHtml(scheduleRate.includes||"")}</span><b>FT ${escapeHtml(scheduleRate.ft||"")}</b></div>`;
+        const actions=document.createElement("div");
+        actions.className="schedule-card-actions";
+        const quote=document.createElement("button");
+        quote.type="button";quote.className="schedule-quote-button";quote.textContent=t("copyQuote");
+        quote.addEventListener("click",async event=>{event.stopPropagation();selectSchedule(schedule.id,false,{fit:false});await copyQuote()});
         const book=document.createElement("button");
         book.type="button";book.className="schedule-book-button";book.textContent=t("bookNow");
-        book.addEventListener("click",event=>{event.stopPropagation();selectSchedule(schedule.id,false,{fit:false});openBookingDrawer()});
-        card.append(pricing,book);
+        book.addEventListener("click",async event=>{
+          event.stopPropagation();
+          selectSchedule(schedule.id,false,{fit:false});
+          await new Promise(requestAnimationFrame);
+          await openBookingDrawer();
+        });
+        actions.append(quote,book);
+        card.append(pricing,actions);
       });
     }
     function findSchedule(id){
@@ -4117,8 +4168,10 @@ ${rate.locked?`${t("agreementLocked")}: ${rate.code} · ${rate.customer}`:""}
       const last=localStorage.getItem(bookingStorageKey(BOOKING_LAST_TEMPLATE_KEY));if(last){$("bookingTemplateSelect").value=last;loadSelectedBookingTemplate(false)}
       applyCustomerProfileToBooking(false);renderBookingEmailRouting();
       $("bookingMessage").className="booking-message";$("bookingMessage").textContent="";$("bookingConfirm").checked=false;
+      const bookingScroll=$("bookingBackdrop").querySelector(".booking-scroll");
+      if(bookingScroll)bookingScroll.scrollTop=0;
       $("bookingBackdrop").classList.add("show");$("bookingBackdrop").setAttribute("aria-hidden","false");document.body.classList.add("booking-open");
-      setTimeout(()=>$("bookingShipper").focus(),220);
+      requestAnimationFrame(()=>{if(bookingScroll)bookingScroll.scrollTop=0});
     }
     function closeBookingDrawer(){$("bookingBackdrop").classList.remove("show");$("bookingBackdrop").setAttribute("aria-hidden","true");document.body.classList.remove("booking-open")}
     function bookingValidation(){
@@ -4366,6 +4419,6 @@ ${rate.locked?`${t("agreementLocked")}: ${rate.code} · ${rate.customer}`:""}
     setTimeout(()=>map.invalidateSize(),180);
   })();
   </script>
-  <script src="./assets/mobile-v2.js?v=11"></script>
+  <script src="./assets/mobile-v2.js?v=12"></script>
 </body>
 </html>
