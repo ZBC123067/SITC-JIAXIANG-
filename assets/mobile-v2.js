@@ -1,8 +1,8 @@
-/* SITC JIAXIANG Booking · shared mobile shell · SITC_MOBILE_BUILD_V16 */
+/* SITC JIAXIANG Booking · shared mobile shell · SITC_MOBILE_BUILD_V17 */
 (() => {
   "use strict";
 
-  const BUILD = "V16";
+  const BUILD = "V17";
   window.SITC_MOBILE_BUILD = BUILD;
   document.documentElement.dataset.sitcBuild = BUILD;
 
@@ -107,7 +107,7 @@
   function buildShell() {
     if ($("mobileAppHeader")) return;
 
-    const adminHref = new URL("./admin.html?build=v16", document.baseURI).href;
+    const adminHref = new URL("./admin.html?build=v17", document.baseURI).href;
 
     const header = document.createElement("header");
     header.id = "mobileAppHeader";
@@ -118,7 +118,7 @@
           <div class="mobile-brand-mark" aria-hidden="true">
             <svg viewBox="0 0 40 40"><path d="M8 25.5h24l-4.5 6.2H12.5L8 25.5Z"></path><path d="M13 12.5h4.6v11H13zM19.3 8h4.6v15.5h-4.6zM25.6 14.5h4.4v9h-4.4z"></path><path class="stroke" d="M7 23.5h26"></path></svg>
           </div>
-          <div class="mobile-brand-copy"><strong>SITC JIAXIANG <i class="mobile-build-badge">V16</i></strong><small id="mobileSubtitle"></small></div>
+          <div class="mobile-brand-copy"><strong>SITC JIAXIANG <i class="mobile-build-badge">V17</i></strong><small id="mobileSubtitle"></small></div>
         </div>
         <div class="mobile-header-actions">
           <button class="mobile-header-button" id="mobileLanguageButton" type="button" aria-label="Language"><span id="mobileLanguageText">EN</span></button>
@@ -401,7 +401,7 @@
         closeMore();
         break;
       case "admin":
-        location.href = new URL("./admin.html?build=v16", document.baseURI).href;
+        location.href = new URL("./admin.html?build=v17", document.baseURI).href;
         break;
       case "install":
         requestInstall();
@@ -467,11 +467,6 @@
 
     $("originSelect")?.addEventListener("change", updateRouteContext);
     $("destinationSelect")?.addEventListener("change", updateRouteContext);
-    $("departureDate")?.addEventListener("change", () => {
-      if (!mobileQuery.matches) return;
-      $("scheduleForm")?.requestSubmit();
-    });
-
     document.querySelectorAll(".nav-tab").forEach((button) => {
       button.addEventListener("click", () => {
         if (!mobileQuery.matches) return;
@@ -552,7 +547,7 @@
   function registerServiceWorker() {
     if (!("serviceWorker" in navigator) || location.protocol === "file:") return;
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./service-worker.js?v=16", { updateViaCache: "none" }).catch((error) => {
+      navigator.serviceWorker.register("./service-worker.js?v=17", { updateViaCache: "none" }).catch((error) => {
         console.warn("SITC JIAXIANG Booking service worker registration failed", error);
       });
     });

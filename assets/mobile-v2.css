@@ -1,4 +1,4 @@
-/* SITC_MOBILE_BUILD_V16
+/* SITC_MOBILE_BUILD_V17
  * SITC One V2.0 · Mobile First layer
  * Keeps the V1.9.3 business logic intact and adds a shared responsive shell.
  */
@@ -485,6 +485,16 @@ textarea{
     grid-template-columns:1fr!important;
     gap:8px!important;
     margin-top:10px!important;
+  }
+
+  .query-options .agreement-input-help{
+    grid-template-columns:1fr!important;
+    gap:4px!important;
+    padding:9px 10px!important;
+  }
+
+  .query-options .agreement-input-help strong{
+    white-space:normal!important;
   }
 
   .compact-field label{

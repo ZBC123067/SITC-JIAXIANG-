@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-title" content="SITC JIAXIANG 订舱" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="format-detection" content="telephone=no" />
-  <meta name="sitc-build" content="V16" />
+  <meta name="sitc-build" content="V17" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png" />
@@ -293,8 +293,8 @@
 
     .query-options{
       display:grid;
-      grid-template-columns:minmax(126px,.78fr) minmax(0,1.22fr);
-      gap:12px;
+      grid-template-columns:minmax(126px,.82fr) minmax(0,1.18fr);
+      gap:10px 12px;
       margin-top:12px;
       padding:12px;
       align-items:start;
@@ -327,14 +327,22 @@
       width:15px;height:15px;flex:0 0 auto;fill:none;stroke:var(--muted);stroke-width:1.8;
       stroke-linecap:round;stroke-linejoin:round
     }
-    .agreement-entry-row{display:block}
+    .agreement-entry-row{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px}
+    .agreement-entry-row .soft-btn{min-height:50px;border-radius:15px}
     .query-options .compact-shell{width:100%}
     .query-options .agreement-input-help{
-      margin-top:8px;
-      padding:10px 11px;
-      line-height:1.55;
-      overflow-wrap:anywhere
+      grid-column:1/-1;
+      margin:0;
+      padding:9px 11px;
+      line-height:1.5;
+      overflow-wrap:anywhere;
+      display:grid;
+      grid-template-columns:max-content minmax(0,1fr);
+      align-items:start;
+      gap:8px 12px
     }
+    .query-options .agreement-input-help strong{padding-top:1px;white-space:nowrap}
+    .query-options .agreement-input-help p{margin:0}
     .export-tools{
       margin-top:12px;padding:11px;border:1px solid color-mix(in srgb,var(--blue) 15%,var(--line));
       border-radius:18px;background:color-mix(in srgb,var(--blue) 4%,var(--surface))
@@ -1459,7 +1467,7 @@
 }
 
   </style>
-  <link rel="stylesheet" href="./assets/mobile-v2.css?v=16" />
+  <link rel="stylesheet" href="./assets/mobile-v2.css?v=17" />
   <style id="mobileEmergencyLayout">
     /* Built-in mobile fallback: prevents the desktop map layout appearing when an old CSS/JS file is cached. */
     @media (max-width:900px), (pointer:coarse) and (hover:none) and (max-width:1180px){
@@ -1684,11 +1692,15 @@
                     <div class="compact-shell">
                       <input id="agreementInput" autocomplete="off" placeholder="输入客户协议号" />
                     </div>
+                    <button class="soft-btn" id="clearAgreementButton" type="button" aria-label="清除协议号" title="清除协议号">
+                      <svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></svg>
+                    </button>
                   </div>
-                  <div class="agreement-help agreement-inline-help agreement-input-help">
-                    <strong data-i18n="viewAgreementExamples">查看演示协议号与说明</strong>
-                    <p data-i18n="agreementHelp">不输入协议号时显示市场价；输入有效协议号后，全部目的港自动切换为该客户协议价。（请联系SITC嘉祥获取协议号）演示协议号：MYJXTGL001</p>
-                  </div>
+                </div>
+
+                <div class="agreement-help agreement-inline-help agreement-input-help">
+                  <strong data-i18n="viewAgreementExamples">查看演示协议号与说明</strong>
+                  <p data-i18n="agreementHelp">不输入协议号时显示市场价；输入有效协议号后，全部目的港自动切换为该客户协议价。（请联系SITC嘉祥获取协议号）演示协议号：MYJXTGL001</p>
                 </div>
               </div>
 
@@ -1713,12 +1725,6 @@
                 </div>
               </div>
 
-              <div class="query-actions">
-                <button class="primary" type="submit" data-i18n="searchSchedule">查询船期与运价</button>
-                <button class="soft-btn" id="clearAgreementButton" type="button" aria-label="清除协议号" title="清除协议号">
-                  <svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></svg>
-                </button>
-              </div>
             </form>
 
             <div class="agreement-state" id="agreementState">
@@ -4333,6 +4339,11 @@ ${rate.locked?`${t("agreementLocked")}: ${rate.code} · ${rate.customer}`:""}
 
     document.querySelectorAll(".nav-tab").forEach(btn=>btn.addEventListener("click",()=>switchView(btn.dataset.view)));
     $("scheduleForm").addEventListener("submit",async e=>{e.preventDefault();await searchSchedules()});
+    $("departureDate").addEventListener("change",()=>{
+      state.selectedSchedule=null;
+      state.selectedPriceOnly=null;
+      searchSchedules({source:"date"});
+    });
     $("destinationSelect").addEventListener("change",()=>{state.selectedSchedule=null;state.selectedPriceOnly=null;renderCvmRouteWidget();searchSchedules({source:"select"})});
     $("cvmRouteLinks")?.addEventListener("click",e=>{
       const button=e.target.closest(".cvm-route-port-link[data-cvm-stop-index]");
@@ -4449,6 +4460,6 @@ ${rate.locked?`${t("agreementLocked")}: ${rate.code} · ${rate.customer}`:""}
     setTimeout(()=>map.invalidateSize(),180);
   })();
   </script>
-  <script src="./assets/mobile-v2.js?v=16"></script>
+  <script src="./assets/mobile-v2.js?v=17"></script>
 </body>
 </html>

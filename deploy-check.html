@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>SITC JIAXIANG V16 部署检查</title>
+  <title>SITC JIAXIANG V17 部署检查</title>
   <style>
     :root{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",sans-serif;color:#172033;background:#eef5fb}
     *{box-sizing:border-box}body{margin:0;padding:28px 16px}.card{width:min(720px,100%);margin:auto;padding:24px;border:1px solid rgba(21,94,150,.15);border-radius:24px;background:rgba(255,255,255,.92);box-shadow:0 18px 48px rgba(29,76,112,.14)}
@@ -14,29 +14,29 @@
 </head>
 <body>
   <main class="card">
-    <span class="build">SITC JIAXIANG · V16</span>
+    <span class="build">SITC JIAXIANG · V17</span>
     <h1>GitHub Pages 部署检查</h1>
     <p class="sub">本页会检查前台、管理后台、手机端样式、手机端功能脚本和缓存文件是否全部上传到当前目录。</p>
     <section class="checks" id="checks"></section>
     <div class="summary" id="summary">正在检查…</div>
-    <div class="actions"><a class="front" href="./index.html?build=v16">打开订舱前台</a><a class="admin" href="./admin.html?build=v16">打开管理后台</a></div>
+    <div class="actions"><a class="front" href="./index.html?build=v17">打开订舱前台</a><a class="admin" href="./admin.html?build=v17">打开管理后台</a></div>
   </main>
   <script>
     const tests=[
-      ["前台 index.html","./index.html?deploy-check=v16","<meta name=\"sitc-build\" content=\"V16\""],
-      ["管理后台 admin.html","./admin.html?deploy-check=v16","SITC JIAXIANG 订舱管理后台"],
-      ["手机端样式 mobile-v2.css","./assets/mobile-v2.css?deploy-check=v16","SITC_MOBILE_BUILD_V16"],
-      ["手机端功能 mobile-v2.js","./assets/mobile-v2.js?deploy-check=v16","SITC_MOBILE_BUILD_V16"],
-      ["Service Worker","./service-worker.js?deploy-check=v16","mobile-shell-v16"],
-      ["版本标识 VERSION.txt","./VERSION.txt?deploy-check=v16","SITC JIAXIANG Booking V16"]
+      ["前台 index.html","./index.html?deploy-check=v17","<meta name=\"sitc-build\" content=\"V17\""],
+      ["管理后台 admin.html","./admin.html?deploy-check=v17","SITC JIAXIANG 订舱管理后台"],
+      ["手机端样式 mobile-v2.css","./assets/mobile-v2.css?deploy-check=v17","SITC_MOBILE_BUILD_V17"],
+      ["手机端功能 mobile-v2.js","./assets/mobile-v2.js?deploy-check=v17","SITC_MOBILE_BUILD_V17"],
+      ["Service Worker","./service-worker.js?deploy-check=v17","mobile-shell-v17"],
+      ["版本标识 VERSION.txt","./VERSION.txt?deploy-check=v17","SITC JIAXIANG Booking V17"]
     ];
     const box=document.getElementById("checks"),summary=document.getElementById("summary");
     Promise.all(tests.map(async([name,url,signature])=>{
       let ok=false,detail="";
-      try{const response=await fetch(url,{cache:"no-store"});const text=await response.text();ok=response.ok&&text.includes(signature);detail=ok?`${response.status} · V16 已确认`:`${response.status} · 文件缺失或仍是旧版`}
+      try{const response=await fetch(url,{cache:"no-store"});const text=await response.text();ok=response.ok&&text.includes(signature);detail=ok?`${response.status} · V17 已确认`:`${response.status} · 文件缺失或仍是旧版`}
       catch(error){detail=`无法读取：${error.message}`}
       const row=document.createElement("div");row.className=`row ${ok?"ok":"bad"}`;row.innerHTML=`<span class="icon">${ok?"✓":"!"}</span><span><b>${name}</b><small>${detail} · ${new URL(url,location.href).pathname}</small></span>`;box.append(row);return ok;
-    })).then(results=>{const count=results.filter(Boolean).length;summary.className=`summary ${count===results.length?"ok":""}`;summary.textContent=count===results.length?"6/6 全部通过：V16 已完整部署，可以正常使用。":`${count}/${results.length} 通过：请把 V16 发布包内的全部文件和文件夹上传到仓库 main 分支根目录，不能只上传 index.html。`;});
+    })).then(results=>{const count=results.filter(Boolean).length;summary.className=`summary ${count===results.length?"ok":""}`;summary.textContent=count===results.length?"6/6 全部通过：V17 已完整部署，可以正常使用。":`${count}/${results.length} 通过：请把 V17 发布包内的全部文件和文件夹上传到仓库 main 分支根目录，不能只上传 index.html。`;});
   </script>
 </body>
 </html>
