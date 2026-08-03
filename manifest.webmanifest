@@ -1,0 +1,48 @@
+{
+  "name": "SITC JIAXIANG 订舱",
+  "short_name": "JIAXIANG订舱",
+  "description": "Mobile-first shipping schedule, rate, tracking and booking workspace.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#f5f5f7",
+  "theme_color": "#007aff",
+  "lang": "zh-CN",
+  "categories": ["business", "productivity", "navigation"],
+  "icons": [
+    {
+      "src": "./assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "船期与运价",
+      "short_name": "船期",
+      "url": "./index.html#schedule",
+      "icons": [{"src": "./assets/icons/icon-192.png", "sizes": "192x192"}]
+    },
+    {
+      "name": "提单跟踪",
+      "short_name": "跟踪",
+      "url": "./index.html#tracking",
+      "icons": [{"src": "./assets/icons/icon-192.png", "sizes": "192x192"}]
+    }
+  ]
+}

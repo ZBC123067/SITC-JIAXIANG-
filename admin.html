@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="sitc-build" content="V14">
+<title>SITC JIAXIANG 订舱管理后台</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./assets/config.js"></script>
+<link rel="stylesheet" href="./assets/admin.css?v=14">
+<link rel="stylesheet" href="./assets/admin-price-periods.css?v=14">
+</head>
+<body>
+<div class="setup-banner hidden" id="setupBanner">Supabase 尚未配置。请先按 README 完成云端初始化并填写 assets/config.js。</div>
+<section class="login-shell hidden" id="loginView">
+  <div class="login-card">
+    <div class="logo">J</div><h1>SITC JIAXIANG 订舱管理后台</h1><p>客户前台免登录；此页面仅供管理员维护订舱、船期与基础数据。</p>
+    <form id="loginForm"><label>管理员邮箱<input id="loginEmail" type="email" required placeholder="admin@example.com"></label><label>密码<input id="loginPassword" type="password" required placeholder="••••••••"></label><button type="submit">登录后台</button></form>
+    <div class="message" id="loginMessage"></div><a href="./index.html">← 返回 SITC JIAXIANG 订舱前台</a>
+  </div>
+</section>
+<div class="admin-app" id="adminView">
+<header><div><div class="eyebrow">SITC JIAXIANG Booking Cloud</div><h1>订舱业务数据管理</h1><p id="workspaceStatus">加载中…</p></div><div class="header-actions"><button class="ghost" id="openFrontend">订舱前台</button><button class="ghost" id="logoutButton">退出</button></div></header>
+<nav id="tabs"><button class="active" data-tab="overview">概览</button><button data-tab="rates">市场价</button><button data-tab="agreements">客户协议</button><button data-tab="schedules">船期</button><button data-tab="bookings">订舱申请</button><button data-tab="settings">系统设置</button><button data-tab="advanced">高级数据</button><button data-tab="history">修改记录</button></nav>
+<main>
+<section class="tab active" id="tab-overview"><div class="stats" id="stats"></div><div class="panel"><h2>发布控制</h2><label>本次修改说明<textarea id="publishNotes" placeholder="例如：更新 8 月古晋出口船期和 TGL 运价"></textarea></label><div class="actions"><button class="secondary" id="saveDraftButton">保存草稿</button><button class="primary" id="publishButton">发布到客户前台</button></div><div class="message" id="publishMessage"></div></div></section>
+<section class="tab" id="tab-rates"><div class="panel wide"><div class="panel-head"><div><h2>市场价</h2><p>客户不输入协议号时看到的价格。</p></div></div><div class="table-scroll"><table><thead><tr><th>国家</th><th>目的港</th><th>代码</th><th>20GP</th><th>40HC</th><th>附加费</th><th>FT</th></tr></thead><tbody id="ratesBody"></tbody></table></div></div></section>
+<section class="tab" id="tab-agreements"><div class="panel wide"><div class="panel-head"><div><h2>客户协议</h2><p>一个协议号管理该客户全部目的港价格。</p></div><button class="primary small" id="addAgreementButton">新增客户协议</button></div><div id="agreementList"></div></div></section>
+<section class="tab" id="tab-schedules"><div class="panel wide"><div class="panel-head"><div><h2>船期维护</h2><p>按目的港维护方案和每一段船程。</p></div><button class="primary small" id="addScheduleButton">新增船期</button></div><div id="scheduleEditor"></div></div></section>
+<section class="tab" id="tab-bookings"><div class="panel wide"><div class="panel-head"><div><h2>订舱申请</h2><p>查看客户提交的订舱资料、邮件发送状态并更新处理进度。</p></div><div class="inline-actions"><select id="bookingStatusFilter"><option value="all">全部状态</option><option value="new">新申请</option><option value="confirmed">已确认</option><option value="rejected">已拒绝</option><option value="completed">已完成</option></select><button class="secondary small" id="refreshBookingsButton">刷新</button><button class="secondary small" id="exportBookingsButton">导出 CSV</button></div></div><div class="booking-admin-layout"><div class="table-scroll"><table><thead><tr><th>临时 B/L</th><th>申请号</th><th>时间</th><th>航线</th><th>客户/协议</th><th>箱量</th><th>发货人</th><th>联系人</th><th>邮件</th><th>状态</th><th></th></tr></thead><tbody id="bookingsBody"></tbody></table></div><aside class="booking-detail" id="bookingDetail"><div class="empty-detail">选择一条订舱申请查看完整资料。</div></aside></div></div></section>
+<section class="tab" id="tab-settings"><div class="panel"><h2>订舱邮件设置</h2><p>设置船司团队的主要收件人和抄送人。客户提交订舱后，客户发件人、客户抄送人以及这里设置的船司同事都会收到同一封邮件。</p><label>船司主要收件邮箱（可多个）<textarea id="bookingToEmails" rows="4" placeholder="每行一个邮箱，或使用逗号分隔">zhongbenchao@sitc.com</textarea></label><label>船司抄送邮箱（可多个）<textarea id="bookingCcEmails" rows="4" placeholder="每行一个邮箱，或使用逗号分隔"></textarea></label><label class="switch-row"><span><b>启用订舱邮件</b><small>关闭后仍保存订舱记录和临时 B/L，但不会发送邮件。</small></span><select id="bookingEmailEnabled"><option value="true">启用</option><option value="false">停用</option></select></label><div class="actions"><button class="primary" id="saveBookingSettingsButton">保存设置</button></div><div class="message" id="settingsMessage"></div><div class="settings-note"><b>邮件发送方式</b><code>RESEND_API_KEY</code><code>BOOKING_FROM_EMAIL</code><p>系统必须使用经过验证的发件域名。客户设置的发件人邮箱会作为 Reply-To，并同时加入邮件抄送；这样所有参与人都能收到邮件并使用“回复全部”。</p></div></div></section>
+<section class="tab" id="tab-advanced"><div class="panel wide"><h2>高级数据</h2><p>用于维护港口、国家排序和地图路径。修改前建议先导出备份。</p><textarea class="json-editor" id="jsonEditor" spellcheck="false"></textarea><div class="actions"><button class="secondary" id="formatJsonButton">格式化 JSON</button><button class="secondary" id="downloadJsonButton">导出备份</button><button class="primary" id="applyJsonButton">应用到草稿</button></div><div class="message" id="jsonMessage"></div></div></section>
+<section class="tab" id="tab-history"><div class="panel wide"><h2>修改记录</h2><div class="table-scroll"><table><thead><tr><th>时间</th><th>管理员</th><th>操作</th><th>对象</th><th>说明</th></tr></thead><tbody id="historyBody"></tbody></table></div></div></section>
+</main>
+<div class="toast" id="toast"></div>
+</div>
+<script src="./assets/admin.js?v=14"></script>
+</body></html>
