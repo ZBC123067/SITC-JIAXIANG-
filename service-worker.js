@@ -1,4 +1,4 @@
-const CACHE_NAME = "sitc-jiaxiang-mobile-shell-v17";
+const CACHE_NAME = "sitc-jiaxiang-mobile-shell-v18";
 const CORE_ASSETS = [
   "./",
   "./index.html",

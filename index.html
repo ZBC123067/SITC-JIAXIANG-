@@ -10,13 +10,14 @@
   <meta name="apple-mobile-web-app-title" content="SITC JIAXIANG 订舱" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="format-detection" content="telephone=no" />
-  <meta name="sitc-build" content="V17" />
+  <meta name="sitc-build" content="V18" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png" />
   <title>SITC JIAXIANG 订舱 · Mobile First</title>
 
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://tile.openstreetmap.org" />
   <link rel="preconnect" href="https://basemaps.cartocdn.com" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -26,6 +27,9 @@
       supabasePublishableKey: "YOUR_PUBLISHABLE_KEY",
       adminPath: "./admin.html",
       bookingFunctionName: "submit-booking"
+    };
+    window.SITC_MAP_CONFIG = window.SITC_MAP_CONFIG || {
+      cartoApiKey: ""
     };
   </script>
   <script src="./assets/config.js"></script>
@@ -1467,7 +1471,7 @@
 }
 
   </style>
-  <link rel="stylesheet" href="./assets/mobile-v2.css?v=17" />
+  <link rel="stylesheet" href="./assets/mobile-v2.css?v=18" />
   <style id="mobileEmergencyLayout">
     /* Built-in mobile fallback: prevents the desktop map layout appearing when an old CSS/JS file is cached. */
     @media (max-width:900px), (pointer:coarse) and (hover:none) and (max-width:1180px){
@@ -2211,10 +2215,25 @@
       cvmSelectedStopIndex:null,
       cvmPanTimer:null,
       toastTimer:null,
-      tileLayer:null
+      tileLayer:null,
+      cartoFailed:false
     };
 
     const $ = id => document.getElementById(id);
+    function mapConfig(){
+      return window.SITC_MAP_CONFIG||{};
+    }
+    function getCartoKey(){
+      const cfg=mapConfig();
+      const raw=typeof cfg.cartoApiKey==="string"?cfg.cartoApiKey.trim():"";
+      if(raw && !raw.includes("YOUR_")) return raw;
+      try{
+        const params=new URLSearchParams(window.location.search);
+        const q=params.get("carto_key")||params.get("cartoApiKey")||"";
+        if(q && q.trim()) return q.trim();
+      }catch(_){}
+      return "";
+    }
     function cloudConfig(){
       return window.SITC_CLOUD_CONFIG||{};
     }
@@ -2347,12 +2366,46 @@
       }
     }
     const map = L.map("map",{zoomControl:true,minZoom:2,maxZoom:18,zoomSnap:.25,wheelPxPerZoomLevel:90,preferCanvas:true}).setView([20,120],4.1);
-    const lightTiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",{subdomains:"abcd",maxZoom:20,attribution:"&copy; OpenStreetMap &copy; CARTO"});
-    const darkTiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",{subdomains:"abcd",maxZoom:20,attribution:"&copy; OpenStreetMap &copy; CARTO"});
-    const osmTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"});
+    const osmTiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
+      maxZoom:19,
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+    });
+    let cartoLayers = null;
+    function ensureCartoLayers(key){
+      if(cartoLayers && cartoLayers.key === key){
+        return cartoLayers;
+      }
+      const encoded = encodeURIComponent(key);
+      const cartoAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>';
+      const light = L.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=${encoded}`,{
+        subdomains:"abcd",
+        maxZoom:20,
+        attribution:cartoAttribution
+      });
+      const dark = L.tileLayer(`https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${encoded}`,{
+        subdomains:"abcd",
+        maxZoom:20,
+        attribution:cartoAttribution
+      });
+
+      const handleCartoTileError = (layerName, layerObj) => {
+        return () => {
+          if(state.tileLayer !== layerObj) return;
+          console.warn(`CARTO base layer [${layerName}] tile error, falling back to OpenStreetMap.`);
+          state.cartoFailed = true;
+          setTiles();
+        };
+      };
+
+      light.on("tileerror", handleCartoTileError("voyager", light));
+      dark.on("tileerror", handleCartoTileError("dark_all", dark));
+
+      cartoLayers = { key, light, dark };
+      return cartoLayers;
+    }
+
     document.documentElement.dataset.theme=state.theme;
     setTiles();
-    state.tileLayer.on("tileerror",()=>{ if(!map.hasLayer(osmTiles)){map.removeLayer(state.tileLayer);osmTiles.addTo(map)} });
 
     // Leaflet stays initialized for the shared desktop/mobile application, but
     // mobile has no map surface. Avoid route drawing and animation work against
@@ -2511,10 +2564,40 @@
       }catch{return structuredClone(LOCAL_DEMO_AGREEMENTS)}
     }
     function setTiles(){
-      if(state.tileLayer && map.hasLayer(state.tileLayer)) map.removeLayer(state.tileLayer);
-      if(map.hasLayer(osmTiles)) map.removeLayer(osmTiles);
-      state.tileLayer=state.theme==="dark"?darkTiles:lightTiles;
-      state.tileLayer.addTo(map);
+      const key = getCartoKey();
+      const useCarto = Boolean(key && !state.cartoFailed);
+      let targetLayer;
+      if(useCarto){
+        const layers = ensureCartoLayers(key);
+        targetLayer = state.theme === "dark" ? layers.dark : layers.light;
+      }else{
+        targetLayer = osmTiles;
+      }
+
+      if(state.tileLayer === targetLayer && map.hasLayer(targetLayer)){
+        return;
+      }
+
+      if(state.tileLayer && state.tileLayer !== targetLayer && map.hasLayer(state.tileLayer)){
+        map.removeLayer(state.tileLayer);
+      }
+
+      if(targetLayer !== osmTiles && map.hasLayer(osmTiles)){
+        map.removeLayer(osmTiles);
+      }
+      if(cartoLayers){
+        if(targetLayer !== cartoLayers.light && map.hasLayer(cartoLayers.light)){
+          map.removeLayer(cartoLayers.light);
+        }
+        if(targetLayer !== cartoLayers.dark && map.hasLayer(cartoLayers.dark)){
+          map.removeLayer(cartoLayers.dark);
+        }
+      }
+
+      state.tileLayer = targetLayer;
+      if(!map.hasLayer(targetLayer)){
+        targetLayer.addTo(map);
+      }
     }
     function switchTheme(){
       state.theme=state.theme==="dark"?"light":"dark";
@@ -4460,6 +4543,6 @@ ${rate.locked?`${t("agreementLocked")}: ${rate.code} · ${rate.customer}`:""}
     setTimeout(()=>map.invalidateSize(),180);
   })();
   </script>
-  <script src="./assets/mobile-v2.js?v=17"></script>
+  <script src="./assets/mobile-v2.js?v=18"></script>
 </body>
 </html>

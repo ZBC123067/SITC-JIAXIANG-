@@ -5,3 +5,10 @@ window.SITC_CLOUD_CONFIG = {
   adminPath: "./admin.html",
   bookingFunctionName: "submit-booking"
 };
+
+window.SITC_MAP_CONFIG = {
+  // CARTO basemaps API key (from https://carto.com/basemaps/apikey/).
+  // Leave empty to use OpenStreetMap standard basemap (Mode B) with no watermark.
+  // Set a valid CARTO API key to enable CARTO Voyager and CARTO Dark basemaps (Mode A).
+  cartoApiKey: ""
+};

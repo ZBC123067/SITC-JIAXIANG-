@@ -1,4 +1,4 @@
-SITC JIAXIANG Booking V17
-Build date: 2026-08-03
+SITC JIAXIANG Booking V18
+Build date: 2026-11-17
 Deployment target: GitHub Pages project root
 Required URL: https://zbc123067.github.io/SITC-JIAXIANG-/
